@@ -102,6 +102,23 @@
   .btn-outline:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
 
   .hero-stats { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); z-index: 2; display: flex; flex-direction: column; gap: 20px; }
+
+  .hero-art {
+    position: absolute;
+    top: 50%;
+    right: 18%;
+    z-index: 2;
+    width: min(420px, 38vw);
+    pointer-events: none;
+    filter: drop-shadow(0 0 40px rgba(45,156,191,0.35)) drop-shadow(0 20px 50px rgba(0,0,0,0.6));
+    animation: floatKayak 6s ease-in-out infinite;
+  }
+  .hero-art img { width: 100%; height: auto; display: block; }
+  @keyframes floatKayak {
+    0%, 100% { transform: translateY(-52%) rotate(-2deg); }
+    50% { transform: translateY(-56%) rotate(2deg); }
+  }
+  @media (max-width: 900px) { .hero-art { display: none; } }
   .stat { text-align: right; color: rgba(255,255,255,0.9); }
   .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1; color: var(--foam); }
   .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
@@ -332,8 +349,8 @@
   .bring-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 100px; font-size: 0.8rem; color: rgba(255,255,255,0.88); }
 
   /* ── SCROLL ANIMATIONS ── */
-  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in { opacity: 1; transform: none; }
+  .fade-in.visible { opacity: 1; transform: none; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
@@ -412,6 +429,9 @@
       <a href="#booking" class="btn-primary">📅 Book Your Adventure</a>
       <a href="#services" class="btn-outline">View Rates &amp; Services</a>
     </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <img src="kayak-art.png" alt="">
   </div>
 </section>
 
@@ -659,7 +679,7 @@
     <p>Deposit is <strong>fully refunded</strong> if: (A) conditions are deemed unsafe by Denman Hornby Canoes &amp; Kayaks, or (B) we need to cancel. In both cases we will first seek to reschedule.</p>
     <p>If your plans change, we will do our best to accommodate a reschedule — but availability cannot be guaranteed and the 50% deposit will not be refunded.</p>
   </div>
-  <a href="mailto:denmanpaddling@gmail.com?subject=Booking%20Request%20%E2%80%93%20Denman%20Hornby%20Canoes%20%26%20Kayaks&body=Hi%20Melodie%20and%20Mario%2C%0A%0AI%20would%20like%20to%20book%3A%0A%0AActivity%3A%20%0ADate(s)%3A%20%0AGroup%20size%20(adults%20%2F%20teens%20%2F%20children)%3A%20%0AAccommodation%20(if%20needed)%3A%20%0ASpecial%20requests%3A%20%0A%0AThanks!" class="btn-primary" style="font-size:1.05rem;padding:18px 40px;">📧 Send Booking Request</a>
+  <a href="mailto:denmanpaddling@gmail.com" class="btn-primary" style="font-size:1.05rem;padding:18px 40px;">📧 Send Booking Request</a>
 </section>
 
 <!-- FOOTER -->
@@ -757,8 +777,8 @@
     if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu();
   });
 
-  /* Scroll-reveal – with fallback for browsers without IntersectionObserver */
-  if (!('IntersectionObserver' in window)) {
+  /* Scroll-reveal – fallback for local file:// and old browsers */
+  if (!('IntersectionObserver' in window) || window.location.protocol === 'file:') {
     document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('visible'); });
     return;
   }
@@ -846,29 +866,4 @@
     if (el.tagName === 'A') el.href = 'tel:+1' + phone1.replace(/[^0-9]/g,'');
   });
   document.querySelectorAll('[data-contact="phone2"]').forEach(function(el){
-    el.textContent = phone2;
-    if (el.tagName === 'A') el.href = 'tel:+1' + phone2.replace(/[^0-9]/g,'');
-  });
-  document.querySelectorAll('[data-contact="email"]').forEach(function(el){
-    el.textContent = email;
-    if (el.tagName === 'A') el.href = 'mailto:' + email;
-  });
-
-  /* --- season banner --- */
-  var banner = document.getElementById('season-banner');
-  var mode = d['bannerMode'] || 'off';
-  var messages = {
-    'open':   '✅ We are open for the season! Call or email to book your adventure.',
-    'closed': '❄️ We are closed for the winter season. Check back in spring!',
-    'custom': d['bannerText'] || ''
-  };
-  if (mode !== 'off' && messages[mode]) {
-    banner.textContent = messages[mode];
-    banner.style.display = 'block';
-  }
-
-}());
-
-</script>
-</body>
-</html>
+    el.textContent = 
