@@ -164,7 +164,7 @@
   section { padding: 90px 5%; }
   .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sea); font-weight: 500; margin-bottom: 12px; }
   .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: var(--ocean); margin-bottom: 16px; }
-  .section-desc { font-size: 1.05rem; color: var(--text-light); line-height: 1.75; max-width: 600px; }
+  .section-desc { font-size: 1.05rem; font-weight: 500; color: var(--text-light); line-height: 1.75; max-width: 600px; }
 
   /* ── ABOUT ── */
   .about { background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -203,12 +203,12 @@
   .price-card-header.sup { background: linear-gradient(135deg, #5a3d2d, #8b6f4e); }
   .price-card-icon { font-size: 2rem; margin-bottom: 8px; }
   .price-card-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 4px; }
-  .price-card-sub { font-size: 1.05rem; opacity: 0.7; }
+  .price-card-sub { font-size: 1.05rem; font-weight: 500; opacity: 0.9; }
   .price-card-body { padding: 24px; }
-  .price-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(10,61,92,0.07); font-size: 1rem; }
+  .price-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(10,61,92,0.07); font-size: 1rem; font-weight: 500; }
   .price-row:last-child { border-bottom: none; }
   .price-row .label { color: var(--text-light); }
-  .price-row .price { font-weight: 600; color: var(--ocean); font-size: 1rem; }
+  .price-row .price { font-weight: 600; color: var(--ocean); font-size: 1rem; font-weight: 500; }
 
   .includes-box { grid-column: 1 / -1; background: linear-gradient(135deg, var(--ocean), var(--ocean-mid)); color: #fff; border-radius: 14px; padding: 32px; margin-top: 10px; }
   .includes-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px; color: var(--foam); }
@@ -216,20 +216,22 @@
   .include-item { display: flex; align-items: center; gap: 10px; font-size: 1.08rem; opacity: 0.9; }
   .include-item::before { content: '✓'; color: var(--foam); font-weight: 700; flex-shrink: 0; }
 
-  .lessons-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .lessons-grid { display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .lessons-grid.active { display: grid; }
   .lesson-card { background: #fff; border-radius: 14px; padding: 30px; border: 1px solid rgba(10,61,92,0.1); transition: box-shadow 0.2s; }
   .lesson-card:hover { box-shadow: 0 8px 40px rgba(10,61,92,0.12); }
   .lesson-card.lesson-dark { background: var(--ocean); border-color: var(--ocean-mid); }
   .lesson-icon { font-size: 2.2rem; margin-bottom: 16px; }
   .lesson-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--ocean); margin-bottom: 10px; }
   .lesson-card.lesson-dark .lesson-title { color: var(--foam); }
-  .lesson-desc { font-size: 1.08rem; color: var(--text-light); line-height: 1.65; margin-bottom: 20px; }
+  .lesson-desc { font-size: 1.08rem; font-weight: 500; color: var(--text-light); line-height: 1.65; margin-bottom: 20px; }
   .lesson-card.lesson-dark .lesson-desc { color: rgba(255,255,255,0.7); }
   .lesson-price-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .price-pill { background: var(--sand); padding: 6px 14px; border-radius: 100px; font-size: 0.82rem; color: var(--ocean); font-weight: 500; }
   .price-pill span { color: var(--text-light); font-weight: 400; }
 
-  .tours-grid { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+  .tours-grid { display: none; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+  .tours-grid.active { display: grid; }
   .tour-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 20px rgba(10,61,92,0.08); }
   .tour-card-top { background: linear-gradient(135deg, var(--ocean), #1e7a9a); padding: 30px; color: #fff; position: relative; }
   .tour-card-top.green { background: linear-gradient(135deg, #2d5a3d, #3d7a52); }
@@ -255,7 +257,7 @@
   .safety-card:hover { background: rgba(255,255,255,0.1); }
   .safety-card .icon { font-size: 2rem; margin-bottom: 14px; }
   .safety-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; color: var(--foam); }
-  .safety-card p { font-size: 1.08rem; opacity: 0.7; line-height: 1.65; }
+  .safety-card p { font-size: 1.08rem; font-weight: 500; opacity: 0.9; line-height: 1.65; }
   .safety-card a { color: var(--foam); }
 
   /* ── ACCOMMODATION ── */
@@ -273,14 +275,14 @@
   .accom-price-row:last-child { border: none; }
   .accom-price-row strong { color: var(--ocean); }
   .accom-features-list { list-style: none; margin-bottom: 24px; }
-  .accom-features-list li { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; font-size: 1.08rem; color: var(--text-light); border-bottom: 1px solid rgba(10,61,92,0.06); }
+  .accom-features-list li { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; font-size: 1.08rem; font-weight: 500; color: var(--text-light); border-bottom: 1px solid rgba(10,61,92,0.06); }
   .accom-features-list li::before { content: '→'; color: var(--sea); flex-shrink: 0; font-weight: 600; }
   .accom-note { font-size: 0.82rem; color: var(--text-light); margin-bottom: 16px; }
   .hostel-cards { display: flex; flex-direction: column; gap: 16px; }
   .hostel-card { background: var(--sand); border-radius: 12px; padding: 24px; border-left: 4px solid var(--sea); }
   .hostel-card.hostel-alt { border-left-color: var(--driftwood); }
   .hostel-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--ocean); margin-bottom: 10px; }
-  .hostel-card p { font-size: 1.08rem; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
+  .hostel-card p { font-size: 1.08rem; font-weight: 500; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
   .hostel-prices { display: flex; gap: 10px; flex-wrap: wrap; }
   .hostel-price { background: var(--ocean); color: #fff; padding: 4px 14px; border-radius: 100px; font-size: 0.82rem; font-weight: 500; }
 
@@ -291,7 +293,7 @@
   .guide-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--ocean), var(--sea)); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; color: #fff; }
   .guide-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--ocean); margin-bottom: 4px; }
   .guide-role { font-size: 1.05rem; color: var(--sea); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-weight: 500; }
-  .guide-bio { font-size: 1.08rem; color: var(--text-light); line-height: 1.65; }
+  .guide-bio { font-size: 1.08rem; font-weight: 500; color: var(--text-light); line-height: 1.65; }
 
   /* ── REVIEWS ── */
   .reviews { background: linear-gradient(160deg, var(--ocean) 0%, #14547a 100%); padding: 90px 5%; }
@@ -304,7 +306,7 @@
   .reviewer { display: flex; align-items: center; gap: 12px; }
   .reviewer-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--sea), var(--foam)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: var(--ocean); flex-shrink: 0; }
   .reviewer-name { font-weight: 600; color: #fff; font-size: 1.08rem; }
-  .reviewer-loc { font-size: 1.08rem; opacity: 0.55; }
+  .reviewer-loc { font-size: 1.08rem; opacity: 0.9; font-weight: 500; }
 
   /* ── BOOKING ── */
   .booking { background: var(--white); text-align: center; padding: 100px 5%; }
@@ -318,7 +320,7 @@
   .contact-card p { font-size: 0.95rem; font-weight: 600; color: var(--ocean); }
   .policy-box { background: var(--sand); border-radius: 12px; padding: 30px 36px; max-width: 700px; margin: 0 auto 40px; text-align: left; }
   .policy-box h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--ocean); margin-bottom: 14px; }
-  .policy-box p { font-size: 1.08rem; color: var(--text-light); line-height: 1.7; margin-bottom: 10px; }
+  .policy-box p { font-size: 1.08rem; font-weight: 500; color: var(--text-light); line-height: 1.7; margin-bottom: 10px; }
   .policy-box p:last-child { margin: 0; }
 
   /* ── FOOTER ── */
@@ -344,7 +346,7 @@
   .what-to-bring { background: linear-gradient(135deg, var(--kelp), #3d7a52); border-radius: 14px; padding: 28px; color: #fff; }
   .what-to-bring h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 16px; color: #c8ebd4; }
   .bring-section { margin-bottom: 14px; }
-  .bring-section h4 { font-size: 1.08rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.65; margin-bottom: 8px; }
+  .bring-section h4 { font-size: 1.08rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; font-weight: 500; margin-bottom: 8px; }
   .bring-tags { display: flex; flex-wrap: wrap; gap: 7px; }
   .bring-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 100px; font-size: 1.05rem; color: rgba(255,255,255,0.88); }
 
@@ -374,6 +376,15 @@
     .footer-top { gap: 24px; }
   }
 </style>
+<script>
+function showTab(name, btn) {
+  document.querySelectorAll('[role="tabpanel"]').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('[role="tab"]').forEach(function(t){t.setAttribute('aria-selected','false');t.setAttribute('tabindex','-1');});
+  var panel = document.getElementById('tab-'+name);
+  if(panel) panel.classList.add('active');
+  if(btn){btn.setAttribute('aria-selected','true');btn.setAttribute('tabindex','0');}
+}
+</script>
 </head>
 <body>
 
@@ -670,7 +681,7 @@
   <div class="contact-cards">
     <a href="tel:+12503350079" class="contact-card" data-contact-card="phone1"><div class="c-icon" aria-hidden="true">📞</div><h4>Call Us</h4><p data-contact="phone1">250-335-0079</p></a>
     <a href="tel:+12507020530" class="contact-card" data-contact-card="phone2"><div class="c-icon" aria-hidden="true">📱</div><h4>Alternate / Text</h4><p data-contact="phone2">250-702-0530</p></a>
-    <a href="/cdn-cgi/l/email-protection#4a2e2f24272b243a2b2e2e2623242d0a2d272b232664292527" class="contact-card" data-contact-card="email"><div class="c-icon" aria-hidden="true">✉️</div><h4>Email</h4><p data-contact="email"><span class="__cf_email__" data-cfemail="f195949f9c909f819095959d989f96b1969c90989ddf929e9c">[email&#160;protected]</span></p></a>
+    <a href="mailto:denmanpaddling@gmail.com" class="contact-card" data-contact-card="email"><div class="c-icon" aria-hidden="true">✉️</div><h4>Email</h4><p data-contact="email">denmanpaddling@gmail.com</p></a>
     <a href="http://denmanpaddling.ca" target="_blank" rel="noopener noreferrer" class="contact-card"><div class="c-icon" aria-hidden="true">🌐</div><h4>Website</h4><p>denmanpaddling.ca</p></a>
   </div>
   <div class="policy-box">
@@ -679,7 +690,7 @@
     <p>Deposit is <strong>fully refunded</strong> if: (A) conditions are deemed unsafe by Denman Hornby Canoes &amp; Kayaks, or (B) we need to cancel. In both cases we will first seek to reschedule.</p>
     <p>If your plans change, we will do our best to accommodate a reschedule — but availability cannot be guaranteed and the 50% deposit will not be refunded.</p>
   </div>
-  <a href="/cdn-cgi/l/email-protection#94f0f1faf9f5fae4f5f0f0f8fdfaf3d4f3f9f5fdf8baf7fbf9" class="btn-primary" style="font-size:1.05rem;padding:18px 40px;">📧 Send Booking Request</a>
+  <a href="mailto:denmanpaddling@gmail.com" class="btn-primary" style="font-size:1.05rem;padding:18px 40px;">📧 Send Booking Request</a>
 </section>
 
 <!-- FOOTER -->
@@ -699,7 +710,7 @@
     </div>
     <div class="footer-links">
       <h4>Contact</h4>
-      <ul><li><a href="tel:+12503350079" data-contact="phone1">250-335-0079</a></li><li><a href="tel:+12507020530" data-contact="phone2">250-702-0530</a></li><li><a href="/cdn-cgi/l/email-protection#0a6e6f64676b647a6b6e6e6663646d4a6d676b636624696567" data-contact="email"><span class="__cf_email__" data-cfemail="5337363d3e323d233237373f3a3d3413343e323a3f7d303c3e">[email&#160;protected]</span></a></li></ul>
+      <ul><li><a href="tel:+12503350079" data-contact="phone1">250-335-0079</a></li><li><a href="tel:+12507020530" data-contact="phone2">250-702-0530</a></li><li><a href="mailto:denmanpaddling@gmail.com" data-contact="email">denmanpaddling@gmail.com</a></li></ul>
     </div>
   </div>
   <div class="footer-bottom">
@@ -708,7 +719,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function () {
   'use strict';
 
@@ -844,14 +855,4 @@
   /* --- tour table cells --- */
   document.querySelectorAll('[data-tour]').forEach(function(el) {
     var key = el.getAttribute('data-tour');
-    if (DEFAULTS[key] !== undefined) el.innerHTML = '<strong>$' + val(key, d) + '</strong>';
-  });
-
-  /* --- accommodation prices --- */
-  document.querySelectorAll('[data-accom]').forEach(function(el) {
-    var key = el.getAttribute('data-accom');
-    if (DEFAULTS[key] !== undefined) el.textContent = '$' + val(key, d) + ' / night';
-  });
-  document.querySelectorAll('[data-accom-raw]').forEach(function(el) {
-    var key = el.getAttribute('data-accom-raw');
-    if (DEFAULTS[key] !== undefined) el.textContent 
+    if (DEFAULTS[key] !== undefined) el.innerHTML = '<strong>$' + va
