@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Quick Reference — Denman Hornby Canoes & Kayaks</title>
+<style>
+  :root {
+    --ocean: #0a3d5c;
+    --sea: #2d9cbf;
+    --green: #2d5a3d;
+    --red: #8a2020;
+    --sand: #f5ede0;
+    --border: #d0dde6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1a2530;
+    background: white;
+    padding: 32px 28px 48px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .header {
+    background: var(--ocean);
+    color: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header .icon { font-size: 2.8rem; }
+  .header h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  .header p { opacity: 0.75; font-size: 0.85rem; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+  }
+  .card-head {
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-head.blue { background: var(--ocean); color: white; }
+  .card-head.green { background: var(--green); color: white; }
+  .card-head.orange { background: #c26a00; color: white; }
+  .card-head.red { background: var(--red); color: white; }
+  .card-head.sand { background: var(--sand); color: var(--ocean); }
+
+  .card-body { padding: 14px 16px; font-size: 0.88rem; }
+  .card-body p { margin-bottom: 8px; color: #2a3a48; }
+  .card-body p:last-child { margin-bottom: 0; }
+
+  .step { 
+    display: flex; 
+    gap: 10px; 
+    padding: 6px 0; 
+    border-bottom: 1px solid #eef2f6; 
+    font-size: 0.86rem;
+    align-items: flex-start;
+  }
+  .step:last-child { border: none; padding-bottom: 0; }
+  .step-n { 
+    background: var(--ocean); 
+    color: white; 
+    width: 20px; height: 20px; 
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .key {
+    display: inline-block;
+    background: #1a2530;
+    color: #a8dde9;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .links { margin-top: 16px; }
+  .link-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.86rem;
+  }
+  .link-row:last-child { border: none; }
+  .link-row .lbl { font-weight: 700; color: var(--ocean); min-width: 80px; }
+  .link-row a { color: var(--sea); text-decoration: none; word-break: break-all; }
+  .link-row .pw { 
+    font-family: 'Courier New', monospace; 
+    background: #1a2530; 
+    color: #a8dde9; 
+    padding: 2px 10px; 
+    border-radius: 5px;
+    font-size: 0.85rem;
+  }
+
+  .status-row {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eef2f6;
+    align-items: flex-start;
+    font-size: 0.86rem;
+  }
+  .status-row:last-child { border: none; }
+  .dot { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+
+  .footer {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--sand);
+    border-radius: 10px;
+    font-size: 0.84rem;
+    color: #5a6a78;
+    text-align: center;
+  }
+
+  @media print {
+    body { padding: 16px; font-size: 13px; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="icon">🛶</div>
+    <div>
+      <h1>Website Quick Reference</h1>
+      <p>Denman Hornby Canoes &amp; Kayaks · Keep this sheet handy!</p>
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-head blue">🔗 Your Important Links &amp; Passwords</div>
+    <div class="links">
+      <div class="link-row">
+        <span class="lbl">🌐 Website</span>
+        <a href="https://denmanpaddling.ca">denmanpaddling.ca</a>
+      </div>
+      <div class="link-row">
+        <span class="lbl">⚙️ Admin</span>
+        <a href="https://denmanpaddling.ca/admin.html">denmanpaddling.ca/admin.html</a>
+        <span class="pw">paddle2003</span>
+        <span style="font-size:0.78rem;color:#7a8a98;">(change this!)</span>
+      </div>
+      <div class="link-row">
+        <span class="lbl">📖 Guide</span>
+        <a href="https://denmanpaddling.ca/guide.html">denmanpaddling.ca/guide.html</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- HOW TO UPDATE PRICES -->
+    <div class="card">
+      <div class="card-head green">💰 How to Update a Price</div>
+      <div class="card-body">
+        <div class="step"><div class="step-n">1</div><span>Open Admin panel → enter password</span></div>
+        <div class="step"><div class="step-n">2</div><span>Click the section (e.g. Rental Prices)</span></div>
+        <div class="step"><div class="step-n">3</div><span>Change the number</span></div>
+        <div class="step"><div class="step-n">4</div><span>Click <strong>💾 Save Changes</strong></span></div>
+        <div class="step"><div class="step-n">5</div><span>Wait 1–2 min → check your website</span></div>
+      </div>
+    </div>
+
+    <!-- HOW TO UPDATE BANNER -->
+    <div class="card">
+      <div class="card-head green">📢 How to Set Season Banner</div>
+      <div class="card-body">
+        <div class="step"><div class="step-n">1</div><span>Open Admin panel → log in</span></div>
+        <div class="step"><div class="step-n">2</div><span>Click <strong>Season Notice &amp; Banner</strong></span></div>
+        <div class="step"><div class="step-n">3</div><span>Click ✅ Open, ❄️ Closed, or type custom</span></div>
+        <div class="step"><div class="step-n">4</div><span>Click <strong>💾 Save Changes</strong></span></div>
+        <div class="step"><div class="step-n">5</div><span>Banner appears at top of website</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid">
+
+    <!-- PRICE NOT SHOWING -->
+    <div class="card">
+      <div class="card-head orange">🔄 Price Changed But Not Showing?</div>
+      <div class="card-body">
+        <p><strong>First:</strong> Wait 2 minutes and try again.</p>
+        <p><strong>Then try a hard refresh:</strong><br>
+        Press <span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">R</span><br>
+        (Mac: <span class="key">⌘</span> + <span class="key">Shift</span> + <span class="key">R</span>)</p>
+        <p>This forces the browser to reload fresh from the server, ignoring saved cache.</p>
+        <p><strong>Still not showing?</strong> Wait up to 2 minutes (GitHub Pages cache) or do hard refresh Ctrl+Shift+R.</p>
+        <p>Check the 🔴/🟢 indicator in Admin — if 🔴, GitHub is not connected.</p>
+      </div>
+    </div>
+
+    <!-- PUBLISH NOT WORKING -->
+    <div class="card">
+      <div class="card-head orange">❌ Publish Not Working?</div>
+      <div class="card-body">
+        <div class="status-row"><span class="dot">🔴</span><span><strong>Red indicator</strong> — GitHub token not set. Click ⚙️ GitHub Settings in Admin and enter your token.</span></div>
+        <div class="status-row"><span class="dot">🟢</span><span><strong>Green but error</strong> — Token may have expired. Go to github.com → Settings → Tokens → generate a new one.</span></div>
+        <div class="status-row"><span class="dot">💾</span><span><strong>Good news:</strong> Your changes are always safe in the browser. Nothing is lost — just try Publish again.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid three" style="margin-top:16px;">
+
+    <!-- FORGOT PASSWORD -->
+    <div class="card">
+      <div class="card-head red">🔑 Forgot Admin Password?</div>
+      <div class="card-body">
+        <p>Contact Karel — he can reset it for you quickly.</p>
+        <p>In future: change the password inside Admin panel → <strong>Change Password</strong> section at the bottom.</p>
+      </div>
+    </div>
+
+    <!-- TOKEN EXPIRED -->
+    <div class="card">
+      <div class="card-head red">🔑 GitHub Token Expired?</div>
+      <div class="card-body">
+        <p>Go to: <strong>github.com → Settings → Developer settings → Personal access tokens</strong></p>
+        <p>Generate a new token → paste it in Admin ⚙️ GitHub Settings.</p>
+      </div>
+    </div>
+
+    <!-- CONTACT KAREL -->
+    <div class="card">
+      <div class="card-head sand">📞 Still Stuck? Contact Karel</div>
+      <div class="card-body">
+        <p>Karel built this website and is happy to help with any bigger changes or issues.</p>
+        <p style="margin-top:8px;"><strong>Email:</strong><br>
+        <span style="color:var(--sea);">kkugler7@gmail.com</span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    🛶 

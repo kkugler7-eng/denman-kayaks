@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Documentation — Denman Hornby Canoes & Kayaks</title>
+<style>
+  :root {
+    --ocean: #0a3d5c;
+    --sea: #2d9cbf;
+    --green: #2d5a3d;
+    --sand: #f5ede0;
+    --border: #d0dde6;
+    --code-bg: #1a2530;
+    --code-fg: #a8dde9;
+    --warn-bg: #fff8e8;
+    --warn-border: #f0a800;
+    --note-bg: #e8f4fb;
+    --note-border: #2d9cbf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #1a2530;
+    background: #f0f4f8;
+  }
+  .page { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* NAV */
+  .toc {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    border-left: 5px solid var(--sea);
+  }
+  .toc h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sea); margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; font-size: 0.9rem; line-height: 2; }
+  .toc a { color: var(--ocean); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* HEADER */
+  .header {
+    background: var(--ocean);
+    color: white;
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+  }
+  .header h1 { font-size: 1.7rem; margin-bottom: 8px; }
+  .header p { opacity: 0.75; font-size: 0.9rem; line-height: 1.7; }
+  .header .meta { margin-top: 16px; display: flex; gap: 20px; flex-wrap: wrap; }
+  .header .meta span { background: rgba(255,255,255,0.12); padding: 4px 12px; border-radius: 100px; font-size: 0.8rem; }
+
+  /* SECTION */
+  .section {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(10,61,92,0.07);
+  }
+  .section-head {
+    background: var(--sand);
+    padding: 16px 28px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-head h2 { font-size: 1.05rem; color: var(--ocean); }
+  .section-head .ico { font-size: 1.4rem; }
+  .section-body { padding: 24px 28px; }
+  .section-body > p { margin-bottom: 12px; color: #2a3a48; }
+  .section-body > p:last-child { margin-bottom: 0; }
+
+  h3 { color: var(--ocean); font-size: 0.95rem; margin: 22px 0 8px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3:first-child { margin-top: 0; }
+
+  /* CODE */
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 18px 20px;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    line-height: 1.75;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #4a7a94; }
+  pre .key { color: #f0c060; }
+  pre .val { color: #7dd87d; }
+  pre .str { color: #f08060; }
+  code {
+    background: #e8f4fb;
+    color: var(--ocean);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+  }
+
+  /* NOTE / WARN */
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-border);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.88rem;
+    color: #1a3a48;
+    margin: 12px 0;
+  }
+  .note strong { color: #0a6a8a; }
+  .warn {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-border);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.88rem;
+    color: #5a4000;
+    margin: 12px 0;
+  }
+  .warn strong { color: #8a5000; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88rem; }
+  th { background: var(--ocean); color: white; padding: 9px 13px; text-align: left; font-size: 0.8rem; }
+  td { padding: 9px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border: none; }
+  tr:nth-child(even) td { background: #f8fafc; }
+
+  /* KEY-VALUE */
+  .kv { list-style: none; }
+  .kv li { display: flex; gap: 16px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; align-items: flex-start; }
+  .kv li:last-child { border: none; }
+  .kv .k { font-family: 'Courier New', monospace; background: var(--code-bg); color: var(--code-fg); padding: 1px 8px; border-radius: 4px; font-size: 0.82rem; white-space: nowrap; flex-shrink: 0; }
+  .kv .desc { color: #2a3a48; }
+
+  /* FLOW */
+  .flow { display: flex; align-items: flex-start; gap: 6px; flex-wrap: wrap; margin: 14px 0; }
+  .flow-step { background: var(--ocean); color: white; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; text-align: center; line-height: 1.4; min-width: 100px; }
+  .flow-step.green { background: var(--green); }
+  .flow-step.red { background: #8a2020; }
+  .flow-arrow { color: var(--sea); font-size: 1.3rem; font-weight: bold; margin-top: 8px; }
+
+  /* TAG */
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+  .tag.green { background: #d4edda; color: var(--green); }
+  .tag.blue { background: #d0eaf5; color: #1a6a8a; }
+  .tag.orange { background: #fdebd0; color: #8a4000; }
+  .tag.red { background: #fde; color: #8a2020; }
+
+  a { color: var(--sea); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>🛶 Developer Documentation</h1>
+    <p>Denman Hornby Canoes &amp; Kayaks · Website technical reference for support developers.<br>
+    This document covers architecture, data flow, configuration, known issues, and how to make changes.</p>
+    <div class="meta">
+      <span>📅 February 2026</span>
+      <span>⚡ Pure static HTML/JS</span>
+      <span>🐙 GitHub Pages</span>
+      <span>🤖 Built with AI assistance (~3h)</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#files">File Structure</a></li>
+      <li><a href="#storage">Data Storage — localStorage Schema</a></li>
+      <li><a href="#admin">Admin Panel — Function Reference</a></li>
+      <li><a href="#publish">Publish Flow — GitHub API</a></li>
+      <li><a href="#regex">Regex Replacement Map</a></li>
+      <li><a href="#index">index.html — Data Attributes</a></li>
+      <li><a href="#auth">Authentication</a></li>
+      <li><a href="#status">Status Indicator</a></li>
+      <li><a href="#hosting">Hosting Options (A vs B)</a></li>
+      <li><a href="#errors">Error Handling &amp; Known Issues</a></li>
+      <li><a href="#changes">How to Make Common Changes</a></li>
+      <li><a href="#security">Security Notes</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. FILES -->
+  <div class="section" id="files">
+    <div class="section-head"><div class="ico">📁</div><h2>1. File Structure</h2></div>
+    <div class="section-body">
+      <table>
+        <tr><th>File</th><th>Purpose</th><th>Required</th></tr>
+        <tr><td><code>index.html</code></td><td>Public website. All prices, contact info, and season banner embedded in HTML with <code>data-*</code> attributes. Includes a localStorage loader script that applies saved admin values on page load.</td><td>Always</td></tr>
+        <tr><td><code>admin.html</code></td><td>Password-protected admin panel. Handles editing, saving to localStorage, and publishing to GitHub via API. Entirely client-side except at publish time.</td><td>Always</td></tr>
+        <tr><td><code>guide.html</code></td><td>Plain-English maintenance guide for owners. No logic.</td><td>Always</td></tr>
+        <tr><td><code>cheatsheet.html</code></td><td>Single-page printable quick reference card for owners.</td><td>Optional</td></tr>
+        <tr><td><code>godaddy-setup-guide.html</code></td><td>Step-by-step DNS setup guide for GoDaddy. For owners/their webmaster.</td><td>Optional</td></tr>
+        <tr><td><code>save.php</code></td><td>Server-side publish helper. <span class="tag orange">Option A only</span> Required only when hosted on a standard PHP web host instead of GitHub Pages.</td><td>Option A only</td></tr>
+        <tr><td><code>technical-overview.html</code></td><td>Architecture overview for non-technical stakeholders.</td><td>Optional</td></tr>
+        <tr><td><code>CNAME</code></td><td>Created automatically by GitHub Pages when custom domain is set. Contains <code>denmanpaddling.ca</code>. Do not edit manually.</td><td>GitHub Pages only</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. LOCALSTORAGE -->
+  <div class="section" id="storage">
+    <div class="section-head"><div class="ico">💾</div><h2>2. Data Storage — localStorage Schema</h2></div>
+    <div class="section-body">
+      <p>All owner data is stored in the browser's <code>localStorage</code>. There are four distinct keys:</p>
+
+      <h3>Storage Keys</h3>
+      <ul class="kv">
+        <li><span class="k">dhck_site_data</span><span class="desc">JSON object containing all editable prices, contact details, and banner settings. Merged with DEFAULTS on read — missing keys fall back to defaults automatically.</span></li>
+        <li><span class="k">dhck_admin_pw</span><span class="desc">Admin password stored as plain string. Default: <code>paddle2003</code>. Changed via the Change Password section in admin panel.</span></li>
+        <li><span class="k">gh_user</span><span class="desc">GitHub username for API publish (e.g. <code>denmanpaddling</code>).</span></li>
+        <li><span class="k">gh_repo</span><span class="desc">GitHub repository name (e.g. <code>denman-kayaks</code>).</span></li>
+        <li><span class="k">gh_token</span><span class="desc">GitHub Personal Access Token. Stored in plain text. Used only for direct HTTPS calls to <code>api.github.com</code>.</span></li>
+      </ul>
+
+      <h3>dhck_site_data — Full Schema</h3>
+      <pre><span class="comment">// All keys and their default values (defined in DEFAULTS object in admin.html)</span>
+{
+  <span class="comment">// Contact</span>
+  <span class="key">"phone1"</span>:          <span class="str">"250-335-0079"</span>,
+  <span class="key">"phone2"</span>:          <span class="str">"250-702-0530"</span>,
+  <span class="key">"email1"</span>:          <span class="str">"denmanpaddling@gmail.com"</span>,
+
+  <span class="comment">// Banner</span>
+  <span class="key">"bannerMode"</span>:      <span class="str">"off"</span>,      <span class="comment">// "off" | "open" | "closed" | "custom"</span>
+  <span class="key">"bannerText"</span>:      <span class="str">""</span>,         <span class="comment">// used only when bannerMode === "custom"</span>
+
+  <span class="comment">// Rentals (single kayak, double kayak, canoe, SUP)</span>
+  <span class="key">"p-sk-half"</span>: <span class="val">60</span>,  <span class="key">"p-sk-full"</span>: <span class="val">80</span>,  <span class="key">"p-sk-24"</span>: <span class="val">90</span>,   <span class="key">"p-sk-multi"</span>: <span class="val">60</span>,
+  <span class="key">"p-dk-half"</span>: <span class="val">100</span>, <span class="key">"p-dk-full"</span>: <span class="val">120</span>, <span class="key">"p-dk-24"</span>: <span class="val">130</span>,  <span class="key">"p-dk-multi"</span>: <span class="val">100</span>,
+  <span class="key">"p-cn-half"</span>: <span class="val">60</span>,  <span class="key">"p-cn-full"</span>: <span class="val">80</span>,  <span class="key">"p-cn-24"</span>: <span class="val">80</span>,   <span class="key">"p-cn-multi"</span>: <span class="val">50</span>,
+  <span class="key">"p-sup-half"</span>: <span class="val">60</span>, <span class="key">"p-sup-full"</span>: <span class="val">80</span>, <span class="key">"p-sup-24"</span>: <span class="val">90</span>,
+
+  <span class="comment">// Lessons</span>
+  <span class="key">"l-intro-adult"</span>: <span class="val">100</span>, <span class="key">"l-intro-teen"</span>: <span class="val">75</span>,  <span class="key">"l-intro-child"</span>: <span class="val">50</span>, <span class="key">"l-child-1hr"</span>: <span class="val">60</span>,
+  <span class="key">"l-kids-1"</span>: <span class="val">60</span>,      <span class="key">"l-kids-2"</span>: <span class="val">50</span>,      <span class="key">"l-adv-adult"</span>: <span class="val">100</span>,  <span class="key">"l-adv-teen"</span>: <span class="val">75</span>,
+
+  <span class="comment">// Tours (kayak half/full day, whale watching half/full day)</span>
+  <span class="key">"t-k-hd-adult"</span>: <span class="val">150</span>, <span class="key">"t-k-hd-teen"</span>: <span class="val">100</span>, <span class="key">"t-k-hd-child"</span>: <span class="val">75</span>,
+  <span class="key">"t-k-fd-adult"</span>: <span class="val">200</span>, <span class="key">"t-k-fd-teen"</span>: <span class="val">150</span>, <span class="key">"t-k-fd-child"</span>: <span class="val">100</span>,
+  <span class="key">"t-w-hd-adult"</span>: <span class="val">125</span>, <span class="key">"t-w-hd-teen"</span>: <span class="val">85</span>,  <span class="key">"t-w-hd-child"</span>: <span class="val">65</span>,
+  <span class="key">"t-w-fd-adult"</span>: <span class="val">160</span>, <span class="key">"t-w-fd-teen"</span>: <span class="val">110</span>, <span class="key">"t-w-fd-child"</span>: <span class="val">85</span>,
+
+  <span class="comment">// Accommodation (3 cabin tiers + hostel single/double/triple)</span>
+  <span class="key">"a-cabin-1"</span>: <span class="val">150</span>, <span class="key">"a-cabin-2"</span>: <span class="val">175</span>, <span class="key">"a-cabin-3"</span>: <span class="val">200</span>,
+  <span class="key">"a-hostel-s"</span>: <span class="val">120</span>, <span class="key">"a-hostel-d"</span>: <span class="val">200</span>, <span class="key">"a-hostel-t"</span>: <span class="val">255</span>
+}</pre>
+
+      <div class="note">
+        <strong>Fallback behaviour:</strong> <code>getData()</code> returns only keys that have been explicitly saved. The helper function <code>v(key)</code> inside <code>publishSite</code> falls back to <code>DEFAULTS[key]</code> if a key is missing. This means clearing localStorage restores all defaults without any code change.
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. ADMIN FUNCTIONS -->
+  <div class="section" id="admin">
+    <div class="section-head"><div class="ico">⚙️</div><h2>3. Admin Panel — Function Reference</h2></div>
+    <div class="section-body">
+
+      <table>
+        <tr><th>Function</th><th>Scope</th><th>Description</th></tr>
+        <tr><td><code>doLogin()</code></td><td>global</td><td>Reads password input, compares to <code>dhck_admin_pw</code> (or DEFAULT_PW), shows/hides login and panel divs.</td></tr>
+        <tr><td><code>doLogout()</code></td><td>global</td><td>Hides admin panel, shows login screen.</td></tr>
+        <tr><td><code>toggleSection(header)</code></td><td>global</td><td>Accordion open/close for each settings section. Toggles <code>.open</code> class on parent card.</td></tr>
+        <tr><td><code>setBanner(mode)</code></td><td>global</td><td>Sets the active banner button UI. Accepts <code>'off'|'open'|'closed'|'custom'</code>. Stores in <code>currentBannerMode</code> variable.</td></tr>
+        <tr><td><code>saveSection(section)</code></td><td>global</td><td>Reads all inputs for the given section, calls <code>setData()</code>, shows save message, then auto-calls <code>publishSite()</code> if token is present.</td></tr>
+        <tr><td><code>changePassword()</code></td><td>global</td><td>Validates new password (min 6 chars, confirmation match), saves to <code>dhck_admin_pw</code> in localStorage.</td></tr>
+        <tr><td><code>publishSite()</code></td><td>global</td><td>Main publish function. Fetches index.html, runs all regex replacements, uploads to GitHub API. See section 4.</td></tr>
+        <tr><td><code>saveGithubSettings()</code></td><td>local</td><td>Saves gh_user, gh_repo, gh_token to localStorage. Calls <code>updateStatusIndicator()</code>.</td></tr>
+        <tr><td><code>toggleGithubSetup()</code></td><td>local</td><td>Shows/hides the GitHub configuration form.</td></tr>
+        <tr><td><code>getData()</code></td><td>local</td><td>Returns parsed <code>dhck_site_data</code> from localStorage, or empty object on parse error.</td></tr>
+        <tr><td><code>setData(obj)</code></td><td>local</td><td>Merges <code>obj</code> into existing data and writes back to localStorage.</td></tr>
+        <tr><td><code>getPassword()</code></td><td>local</td><td>Returns saved password or DEFAULT_PW constant.</td></tr>
+        <tr><td><code>loadAllFields()</code></td><td>local</td><td>On login, populates all form inputs from localStorage data + DEFAULTS.</td></tr>
+        <tr><td><code>updateStatusIndicator()</code></td><td>local</td><td>Sets the 🔴/🟢 badge in the header based on presence of <code>gh_token</code> in localStorage.</td></tr>
+        <tr><td><code>showSaveMsg(id)</code></td><td>local</td><td>Shows save confirmation message. If no token, shows orange "Saved locally" warning instead of green "✅ Saved!".</td></tr>
+      </table>
+
+      <h3>Constants (top of IIFE)</h3>
+      <pre><span class="key">STORAGE_KEY</span>  = <span class="str">'dhck_site_data'</span>   <span class="comment">// localStorage key for all site data</span>
+<span class="key">PW_KEY</span>       = <span class="str">'dhck_admin_pw'</span>    <span class="comment">// localStorage key for admin password</span>
+<span class="key">DEFAULT_PW</span>   = <span class="str">'paddle2003'</span>       <span class="comment">// ← change before deployment!</span></pre>
+    </div>
+  </div>
+
+  <!-- 4. PUBLISH FLOW -->
+  <div class="section" id="publish">
+    <div class="section-head"><div class="ico">🚀</div><h2>4. Publish Flow — GitHub API</h2></div>
+    <div class="section-body">
+
+      <div class="flow">
+        <div class="flow-step">1. Read gh_user<br>gh_repo<br>gh_token</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">2. Show spinner<br>disable button</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">3. fetch()<br>index.html<br>as text</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">4. Run all<br>regex<br>replacements</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">5. GET current<br>file SHA<br>from GitHub</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">6. Base64<br>encode<br>HTML</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">7. PUT to<br>GitHub API<br>with SHA</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step green">8. ✅ Live<br>in 1–2 min</div>
+      </div>
+
+      <h3>Step 5 — SHA Retrieval (critical)</h3>
+      <p>GitHub's Contents API requires the current file SHA for every PUT (update) request. Without it, the API returns <strong>409 Conflict</strong>. The code performs a fresh GET before every PUT, so even rapid sequential publishes will always have the correct SHA.</p>
+      <pre><span class="comment">// GET current SHA</span>
+fetch(<span class="str">'https://api.github.com/repos/'</span> + ghUser + <span class="str">'/'</span> + ghRepo + <span class="str">'/contents/index.html'</span>, {
+  headers: { <span class="key">'Authorization'</span>: <span class="str">'token '</span> + ghToken }
+})
+.then(r => r.json())
+.then(fileInfo => {
+  var sha = fileInfo.sha;   <span class="comment">// ← always fresh</span>
+  <span class="comment">// PUT with sha...</span>
+});</pre>
+
+      <h3>Step 6 — Base64 Encoding</h3>
+      <p>Standard <code>btoa()</code> fails on non-Latin characters (diacritics in custom banner text). The safe encoding pattern used:</p>
+      <pre>var encoded = btoa(
+  encodeURIComponent(html).replace(/%([0-9A-F]{2})/g, function(m, p1) {
+    return String.fromCharCode(<span class="str">'0x'</span> + p1);
+  })
+);</pre>
+      <div class="note"><strong>Why this works:</strong> <code>encodeURIComponent</code> converts all non-ASCII to <code>%XX</code> percent-encoded bytes, then the replace converts each byte back to a single character. The resulting string is pure Latin-1, which <code>btoa()</code> can safely encode.</div>
+
+      <h3>GitHub API Endpoint</h3>
+      <pre>PUT https://api.github.com/repos/{gh_user}/{gh_repo}/contents/index.html
+
+Body: {
+  <span class="key">"message"</span>: <span class="str">"Update prices via admin panel"</span>,
+  <span class="key">"content"</span>: <span class="str">"&lt;base64-encoded HTML&gt;"</span>,
+  <span class="key">"sha"</span>:     <span class="str">"&lt;current file SHA&gt;"</span>
+}
+
+Headers:
+  Authorization: token ghp_xxxxxxxxxxxx
+  Accept: application/vnd.github.v3+json
+  Content-Type: application/json</pre>
+
+      <h3>Token Requirements</h3>
+      <table>
+        <tr><th>Token type</th><th>Required scope</th><th>Recommended expiry</th></tr>
+        <tr><td>Classic PAT</td><td><code>repo</code></td><td>No expiration</td></tr>
+        <tr><td>Fine-grained PAT</td><td>Contents: Read &amp; Write (on this repo only)</td><td>No expiration</td></tr>
+      </table>
+      <div class="warn"><strong>Token expiry:</strong> If the owner set an expiry (e.g. 90 days), publishes will silently fail with 401 after expiry. The status indicator will still show 🟢 (it only checks for presence of token, not validity). If publish stops working, first step is always to regenerate the token at github.com → Settings → Developer settings → Personal access tokens.</div>
+    </div>
+  </div>
+
+  <!-- 5. REGEX MAP -->
+  <div class="section" id="regex">
+    <div class="section-head"><div class="ico">🔍</div><h2>5. Regex Replacement Map</h2></div>
+    <div class="section-body">
+      <p>During publish, the following regex patterns are applied to the fetched <code>index.html</code> text. All replacements run in sequence. Order does not matter as the patterns are mutually exclusive.</p>
+
+      <table>
+        <tr><th>Data type</th><th>Regex pattern</th><th>Replacement</th></tr>
+        <tr>
+          <td>Prices &amp; lessons</td>
+          <td><code>(data-price="KEY">\)\\$?[0-9]+</code></td>
+          <td><code>$1$VALUE</code></td>
+        </tr>
+        <tr>
+          <td>Tour cells</td>
+          <td><code>(data-tour="KEY"><strong>)\\$?[0-9]+(<\/strong>)</code></td>
+          <td><code>$1$VALUE$2</code></td>
+        </tr>
+        <tr>
+          <td>Cabin accommodation</td>
+          <td><code>(data-accom="KEY">)\\$?[0-9]+\\s*\\/\\s*night</code></td>
+          <td><code>$1$VALUE / night</code></td>
+        </tr>
+        <tr>
+          <td>Hostel accommodation</td>
+          <td><code>(data-accom-raw="KEY">)\\$?[0-9]+</code></td>
+          <td><code>$1$VALUE</code></td>
+        </tr>
+        <tr>
+          <td>Phone (text node)</td>
+          <td><code>(data-contact="phone1">)[^&lt;]+</code></td>
+          <td><code>$1VALUE</code></td>
+        </tr>
+        <tr>
+          <td>Phone (tel: href)</td>
+          <td><code>(href="tel:\+1)[0-9]+(" [^>]*data-contact="phone1")</code></td>
+          <td><code>$1DIGITS$2</code></td>
+        </tr>
+        <tr>
+          <td>Email (text node)</td>
+          <td><code>(data-contact="email">)[^&lt;]+</code></td>
+          <td><code>$1VALUE</code></td>
+        </tr>
+        <tr>
+          <td>Email (mailto: href)</td>
+          <td><code>(href="mailto:)[^"]+(" [^>]*data-contact="email")</code></td>
+          <td><code>$1VALUE$2</code></td>
+        </tr>
+        <tr>
+          <td>Banner visibility</td>
+          <td><code>(&lt;div id="season-banner"[^>]*style=")display:none;</code></td>
+          <td>Replaces with <code>display:block;</code> when active</td>
+        </tr>
+        <tr>
+          <td>Banner text</td>
+          <td><code>(&lt;div id="season-banner"[^>]*>)[^&lt;]*</code></td>
+          <td><code>$1MESSAGE</code></td>
+        </tr>
+      </table>
+
+      <div class="warn">
+        <strong>Fragility warning:</strong> These regexes depend on the exact HTML structure of <code>index.html</code>. If you refactor the HTML (e.g. add attributes, change tag nesting around data-* elements), the regexes may stop matching. Always test publish after any structural changes to <code>index.html</code>.
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. DATA ATTRIBUTES -->
+  <div class="section" id="index">
+    <div class="section-head"><div class="ico">🏷️</div><h2>6. index.html — Data Attributes</h2></div>
+    <div class="section-body">
+      <p>All editable values in <code>index.html</code> are tagged with <code>data-*</code> attributes. These serve two purposes: (1) the localStorage loader updates them on page load for the owner's browser, (2) the publish regex targets them to embed values permanently in the file.</p>
+
+      <h3>Attribute Types</h3>
+      <table>
+        <tr><th>Attribute</th><th>Used on</th><th>Example</th></tr>
+        <tr><td><code>data-price="KEY"</code></td><td><code>&lt;span&gt;</code> elements</td><td><code>&lt;span data-price="p-sk-half"&gt;$60&lt;/span&gt;</code></td></tr>
+        <tr><td><code>data-lesson="KEY"</code></td><td><code>&lt;span&gt;</code> elements</td><td><code>&lt;span data-lesson="l-intro-adult"&gt;$100&lt;/span&gt;</code></td></tr>
+        <tr><td><code>data-tour="KEY"</code></td><td><code>&lt;td&gt;</code> elements</td><td><code>&lt;td data-tour="t-k-hd-adult"&gt;&lt;strong&gt;$150&lt;/strong&gt;&lt;/td&gt;</code></td></tr>
+        <tr><td><code>data-accom="KEY"</code></td><td><code>&lt;td&gt;</code> elements</td><td><code>&lt;td data-accom="a-cabin-1"&gt;$150 / night&lt;/td&gt;</code></td></tr>
+        <tr><td><code>data-accom-raw="KEY"</code></td><td><code>&lt;span&gt;</code> elements</td><td><code>&lt;span data-accom-raw="a-hostel-s"&gt;$120&lt;/span&gt;</code></td></tr>
+        <tr><td><code>data-contact="phone1"</code></td><td>Text nodes &amp; <code>&lt;a href="tel:"&gt;</code></td><td><code>&lt;span data-contact="phone1"&gt;250-335-0079&lt;/span&gt;</code></td></tr>
+        <tr><td><code>data-contact="email"</code></td><td>Text nodes &amp; <code>&lt;a href="mailto:"&gt;</code></td><td><code>&lt;a href="mailto:..." data-contact="email"&gt;...&lt;/a&gt;</code></td></tr>
+        <tr><td><code>id="season-banner"</code></td><td>Top-level <code>&lt;div&gt;</code></td><td>Hidden by default (<code>display:none</code>). Admin switches to block.</td></tr>
+      </table>
+
+      <h3>localStorage Loader Script</h3>
+      <p>At the bottom of <code>index.html</code>, a small inline script reads <code>dhck_site_data</code> from localStorage and updates all tagged elements. This makes changes immediately visible in the owner's browser without publishing.</p>
+      <pre><span class="comment">// Simplified excerpt of the loader logic in index.html</span>
+var data = JSON.parse(localStorage.getItem(<span class="str">'dhck_site_data'</span>)) || {};
+
+document.querySelectorAll(<span class="str">'[data-price]'</span>).forEach(el => {
+  var key = el.getAttribute(<span class="str">'data-price'</span>);
+  if (data[key]) el.textContent = <span class="str">'$'</span> + data[key];
+});
+<span class="comment">// ... similar for data-lesson, data-tour, data-accom, data-contact</span></pre>
+    </div>
+  </div>
+
+  <!-- 7. AUTH -->
+  <div class="section" id="auth">
+    <div class="section-head"><div class="ico">🔑</div><h2>7. Authentication</h2></div>
+    <div class="section-body">
+      <p>The admin panel uses simple client-side password protection. This is appropriate for a low-risk use case (price updates on a small business site) but is <strong>not</strong> suitable for sensitive data.</p>
+      <table>
+        <tr><th>Aspect</th><th>Implementation</th></tr>
+        <tr><td>Storage</td><td>Plain string in <code>dhck_admin_pw</code> localStorage key</td></tr>
+        <tr><td>Default</td><td><code>paddle2003</code> — change before handover</td></tr>
+        <tr><td>Check</td><td>Direct string comparison in <code>doLogin()</code></td></tr>
+        <tr><td>Session</td><td>No session token. Login state is a CSS class on the panel div. Refreshing the page logs out.</td></tr>
+        <tr><td>Reset</td><td>Clear <code>dhck_admin_pw</code> from DevTools → Application → localStorage, or redeploy admin.html with changed DEFAULT_PW</td></tr>
+      </table>
+      <div class="note"><strong>To reset a forgotten password:</strong> Open browser DevTools (F12) → Application tab → Local Storage → find <code>dhck_admin_pw</code> → delete it. The panel will fall back to DEFAULT_PW (<code>paddle2003</code>). Then log in and set a new password.</div>
+    </div>
+  </div>
+
+  <!-- 8. STATUS -->
+  <div class="section" id="status">
+    <div class="section-head"><div class="ico">🚦</div><h2>8. Status Indicator</h2></div>
+    <div class="section-body">
+      <p>The admin panel header shows a 🔴/🟢 badge indicating whether GitHub publishing is configured.</p>
+      <table>
+        <tr><th>State</th><th>Condition</th><th>Save message shown</th></tr>
+        <tr><td>🟢 Connected</td><td><code>gh_token</code> exists in localStorage</td><td>✅ Saved! (green)</td></tr>
+        <tr><td>🔴 Offline</td><td><code>gh_token</code> missing</td><td>💾 Saved locally. Set up GitHub to publish live. (orange)</td></tr>
+      </table>
+      <div class="warn"><strong>Limitation:</strong> The indicator only checks for the presence of the token, not its validity. A expired or revoked token will still show 🟢. The publish attempt will then fail with a 401 error from the API.</div>
+    </div>
+  </div>
+
+  <!-- 9. HOSTING -->
+  <div class="section" id="hosting">
+    <div class="section-head"><div class="ico">🌐</div><h2>9. Hosting Options</h2></div>
+    <div class="section-body">
+      <table>
+        <tr><th></th><th>Option A — Standard web host</th><th>Option B — GitHub Pages (current)</th></tr>
+        <tr><td><strong>Files needed</strong></td><td>index.html, admin.html, guide.html, save.php</td><td>index.html, admin.html, guide.html</td></tr>
+        <tr><td><strong>Publish mechanism</strong></td><td>POST to save.php on same server</td><td>GitHub Contents API PUT</td></tr>
+        <tr><td><strong>PHP required</strong></td><td>Yes</td><td>No</td></tr>
+        <tr><td><strong>DNS changes</strong></td><td>None (drop-in replacement)</td><td>4× A record + 1× CNAME in GoDaddy</td></tr>
+        <tr><td><strong>Cost</strong></td><td>Existing hosting fee</td><td>Free</td></tr>
+        <tr><td><strong>Current status</strong></td><td>Not deployed — admin.html configured for Option B</td><td>✅ Active</td></tr>
+      </table>
+
+      <h3>Switching from Option B to Option A</h3>
+      <p>If the website moves to a standard PHP host, two changes are required:</p>
+      <p><strong>1.</strong> Deploy <code>save.php</code> to the server root alongside <code>index.html</code>. Change the <code>$secret</code> value inside it and note it.</p>
+      <p><strong>2.</strong> In <code>admin.html</code>, replace the GitHub API section of <code>publishSite()</code> with a POST to <code>save.php</code>:</p>
+      <pre><span class="comment">// Replace the GitHub API fetch block with:</span>
+fetch(<span class="str">'save.php'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: { <span class="key">'Content-Type'</span>: <span class="str">'application/json'</span> },
+  body: JSON.stringify({ token: <span class="str">'YOUR_SECRET'</span>, html: html })
+})
+.then(r => r.json())
+.then(result => {
+  if (result.ok) {
+    <span class="comment">// show success</span>
+  } else { throw new Error(<span class="str">'Save failed'</span>); }
+})
+.catch(err => { <span class="comment">/* show error */</span> });</pre>
+    </div>
+  </div>
+
+  <!-- 10. ERRORS -->
+  <div class="section" id="errors">
+    <div class="section-head"><div class="ico">⚠️</div><h2>10. Error Handling &amp; Known Issues</h2></div>
+    <div class="section-body">
+      <table>
+        <tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr>
+        <tr><td>Publish fails, "check GitHub settings" shown</td><td>Token expired, wrong username/repo, or network error</td><td>Check DevTools console for exact API error. Regenerate token if 401.</td></tr>
+        <tr><td>409 Conflict from GitHub API</td><td>SHA mismatch — should not happen as GET always precedes PUT</td><td>Wait 30s and try again. If persistent, check if another client is also publishing.</td></tr>
+        <tr><td>Price not visible after publish</td><td>Browser cache / GitHub Pages CDN cache</td><td>Hard refresh: Ctrl+Shift+R. Wait up to 5 min for CDN propagation.</td></tr>
+        <tr><td>Regex doesn't replace a value</td><td>HTML structure around data-* attribute was changed</td><td>Inspect the element in DevTools, compare to regex pattern in publishSite. Update regex if HTML changed.</td></tr>
+        <tr><td>Banner text with special characters breaks publish</td><td>Base64 encoding issue (rare)</td><td>The UTF-8 safe encoding should handle this. If not, check console for btoa() error.</td></tr>
+        <tr><td>Spinner stays visible after failed publish</td><td>Uncaught exception before .catch block</td><td>Open DevTools console, find the error. The overlay has no timeout — reload the page to dismiss it.</td></tr>
+        <tr><td>Admin password forgotten</td><td>Lost dhck_admin_pw value</td><td>DevTools → Application → Local Storage → delete dhck_admin_pw. Falls back to DEFAULT_PW (paddle2003).</td></tr>
+        <tr><td>All prices reset to defaults</td><td>localStorage cleared (browser history wipe, private mode, different browser)</td><td>Data is also embedded in the published index.html. Open published site, copy values manually back to admin panel, re-save.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 11. COMMON CHANGES -->
+  <div class="section" id="changes">
+    <div class="section-head"><div class="ico">🛠️</div><h2>11. How to Make Common Changes</h2></div>
+    <div class="section-body">
+
+      <h3>Add a new price field</h3>
+      <p>1. In <code>index.html</code>: add <code>data-price="p-newitem-half"</code> attribute to the relevant element.<br>
+      2. In <code>admin.html</code> DEFAULTS: add <code>'p-newitem-half': 99</code>.<br>
+      3. In <code>saveSection()</code>: add <code>'p-newitem-half'</code> to the appropriate array.<br>
+      4. In the admin HTML: add an <code>&lt;input id="p-newitem-half"&gt;</code> in the prices section.<br>
+      5. The regex in <code>publishSite()</code> will automatically handle it — it loops over all keys in the prices array.</p>
+
+      <h3>Change the default password</h3>
+      <p>In <code>admin.html</code>, find <code>var DEFAULT_PW = 'paddle2003'</code> and change the value. Re-upload to GitHub.</p>
+
+      <h3>Change the GitHub repository</h3>
+      <p>Owner updates in Admin panel → ⚙️ GitHub Settings → new username/repo/token → Save. No code change needed.</p>
+
+      <h3>Add a new banner message option</h3>
+      <p>In <code>publishSite()</code>, add the new mode to the <code>bannerMessages</code> object. Add a corresponding button in the admin HTML banner section with <code>onclick="setBanner('newmode')"</code>.</p>
+
+      <h3>Update contact details structure</h3>
+      <p>If adding a third phone number, add a new <code>data-contact="phone3"</code> attribute in index.html, add <code>phone3</code> to DEFAULTS, to <code>saveSection('contact')</code> array, and add a corresponding regex replacement in <code>publishSite()</code>.</p>
+
+    </div>
+  </div>
+
+  <!-- 12. SECURITY -->
+  <div class="section" id="security">
+    <div class="section-head"><div class="ico">🔒</div><h2>12. Security Notes</h2></div>
+    <div class="section-body">
+      <table>
+        <tr><th>Item</th><th>Risk level</th><th>Notes</th></tr>
+        <tr><td>Admin password (plaintext localStorage)</td><td>Low</td><td>Acceptable for this use case. Anyone with physical access to the device and DevTools can read it. Not exposed over network.</td></tr>
+        <tr><td>GitHub PAT in localStorage</td><td>Medium</td><td>If the owner's browser is compromised (XSS on a different tab, malicious extension), the token could be exfiltrated. Mitigate by using a fine-grained token scoped to this repo only with Contents: Write permission only.</td></tr>
+        <tr><td>Admin URL not linked</td><td>Low</td><td>Security by obscurity only. The admin.html URL is not secret — anyone who knows it can reach the login page. The password is the only gate.</td></tr>
+        <tr><td>save.php (Option A)</td><td>Medium if misconfigured</td><td>The shared secret must be changed from any default. Without it, anyone who finds the endpoint URL can overwrite index.html. Add IP restriction in .htaccess for additional protection.</td></tr>
+        <tr><td>HTTPS</td><td>N/A</td><td>GitHub Pages enforces HTTPS automatically. All API calls to github.com are HTTPS only.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;color:#7a94a8;font-size:0.8rem;">
+    Denman Hornby Canoes &amp; Kayaks · Developer Documentation · February 2026<br>
+    Built with AI assistance · Contact: kkugler7@gmail.com
+  </div>
+
+</div>
+</body>
+</html>

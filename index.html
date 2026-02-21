@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denman Hornby Canoes &amp; Kayaks | Kayak Rentals, Tours &amp; Lessons – Denman Island BC</title>
+<meta name="description" content="Kayak rentals, guided tours, and lessons on Denman Island, BC since 2003. Explore Lambert Channel, Chrome Island Lighthouse, Sandy Island Marine Park. All ages welcome. Book now.">
+<meta name="keywords" content="kayak rentals Denman Island, kayak tours BC, canoe rentals Denman Hornby, paddleboard rental, kayak lessons BC, Lambert Channel paddling, Denman Island accommodation">
+<meta property="og:title" content="Denman Hornby Canoes &amp; Kayaks | Paddling BC's West Coast">
+<meta property="og:description" content="Family-owned kayak rentals, lessons &amp; guided tours on Denman Island since 2003. All ages welcome. Book your West Coast adventure.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://denmanpaddling.ca">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Denman Hornby Canoes &amp; Kayaks | Denman Island BC">
+<meta name="twitter:description" content="Kayak rentals, tours &amp; lessons on Lambert Channel. Family-run since 2003. All ages welcome.">
+<link rel="canonical" href="https://denmanpaddling.ca">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0a3d5c;
+    --ocean-mid: #1a6b8a;
+    --sea: #2d9cbf;
+    --foam: #a8dde9;
+    --sand: #f5ede0;
+    --driftwood: #8b6f4e;
+    --kelp: #2d5a3d;
+    --white: #fafcfd;
+    --text: #1a2530;
+    --text-light: #4a6274;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  /* ── REDUCED MOTION ── */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .wave { animation: none !important; }
+    .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    background: var(--ocean);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(45,156,191,0.25) 0%, transparent 70%),
+      linear-gradient(160deg, #051d2e 0%, #0a3d5c 45%, #1a6b8a 100%);
+  }
+  .wave-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 220px; pointer-events: none; }
+  .wave {
+    position: absolute; bottom: 0; left: 0; width: 200%; height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z' fill='%23fafcfd'/%3E%3C/svg%3E") repeat-x;
+    background-size: 50% 100%;
+    opacity: 0.12;
+    animation: wave 8s linear infinite;
+  }
+  .wave:nth-child(2) { opacity: 0.08; animation: wave 12s linear infinite reverse; background-position: 0 10px; }
+  .wave:nth-child(3) { opacity: 1; animation: wave 6s linear infinite; }
+  @keyframes wave { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  .hero-content { position: relative; z-index: 2; padding: 0 5% 100px; max-width: 900px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(45,156,191,0.2); border: 1px solid rgba(168,221,233,0.3);
+    color: var(--foam); padding: 6px 16px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '🌊'; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5.5rem); color: #fff; line-height: 1.1; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--foam); }
+  .hero-sub { font-size: 1.15rem; color: rgba(255,255,255,0.72); max-width: 520px; line-height: 1.7; margin-bottom: 40px; font-weight: 300; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--sea); color: #fff; padding: 16px 32px;
+    border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 1rem;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent; display: inline-block;
+  }
+  .btn-primary:hover { background: #39aed0; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(45,156,191,0.4); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.85); padding: 14px 30px;
+    border-radius: 6px; text-decoration: none; font-weight: 400; font-size: 1rem;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, color 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+
+  .hero-stats { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); z-index: 2; display: flex; flex-direction: column; gap: 20px; }
+  .stat { text-align: right; color: rgba(255,255,255,0.9); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; line-height: 1; color: var(--foam); }
+  .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+
+  /* ── NAV ── */
+  #main-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 5%; display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+    -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px);
+  }
+  #main-nav.scrolled {
+    background: rgba(10,61,92,0.96);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    padding: 12px 5%; box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .nav-logo { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.05rem; text-decoration: none; flex-shrink: 0; }
+  .nav-logo span { color: var(--foam); }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--foam); }
+  .nav-cta { background: var(--sea) !important; color: #fff !important; padding: 8px 20px; border-radius: 5px; font-weight: 500; transition: background 0.2s !important; }
+  .nav-cta:hover { background: #39aed0 !important; }
+
+  /* hamburger */
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 110; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* mobile overlay */
+  .nav-mobile-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(5,29,46,0.97); z-index: 105;
+    flex-direction: column; justify-content: center; align-items: center; gap: 32px;
+  }
+  .nav-mobile-overlay.open { display: flex; }
+  .nav-mobile-overlay a { color: rgba(255,255,255,0.88); text-decoration: none; font-size: 1.4rem; font-family: 'Playfair Display', serif; transition: color 0.2s; }
+  .nav-mobile-overlay a:hover { color: var(--foam); }
+  .nav-mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 90px 5%; }
+  .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sea); font-weight: 500; margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; color: var(--ocean); margin-bottom: 16px; }
+  .section-desc { font-size: 1.05rem; color: var(--text-light); line-height: 1.75; max-width: 600px; }
+
+  /* ── ABOUT ── */
+  .about { background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .feature-card { background: var(--sand); padding: 20px; border-radius: 10px; border-left: 3px solid var(--sea); }
+  .feature-card .icon { font-size: 1.5rem; margin-bottom: 8px; }
+  .feature-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--ocean); margin-bottom: 4px; }
+  .feature-card p { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; }
+  .about-visual { position: relative; }
+  .about-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-radius: 14px; overflow: hidden; }
+  .about-img-grid img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform 0.4s; }
+  .about-img-grid img:first-child { grid-column: 1 / -1; height: 300px; }
+  @media (hover: hover) { .about-img-grid img:hover { transform: scale(1.02); } }
+  .since-badge { position: absolute; bottom: -20px; left: -20px; background: var(--ocean); color: #fff; padding: 20px 24px; border-radius: 10px; text-align: center; box-shadow: 0 10px 40px rgba(10,61,92,0.3); }
+  .since-badge .year { font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1; color: var(--foam); }
+  .since-badge .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--sand); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; flex-wrap: wrap; gap: 20px; }
+
+  [role="tablist"] { display: flex; gap: 8px; background: rgba(10,61,92,0.08); padding: 6px; border-radius: 8px; flex-wrap: wrap; }
+  [role="tab"] { padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; background: transparent; color: var(--text-light); transition: background 0.2s, color 0.2s, box-shadow 0.2s; }
+  [role="tab"][aria-selected="true"] { background: var(--ocean); color: #fff; box-shadow: 0 4px 12px rgba(10,61,92,0.25); }
+  [role="tab"]:focus-visible { outline: 2px solid var(--sea); outline-offset: 2px; }
+  [role="tabpanel"] { display: none; }
+  [role="tabpanel"].active { display: grid; }
+
+  .price-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .price-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 20px rgba(10,61,92,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(10,61,92,0.14); }
+  .price-card-header { padding: 24px; color: #fff; }
+  .price-card-header.kayak { background: linear-gradient(135deg, #0a3d5c, #1a6b8a); }
+  .price-card-header.double { background: linear-gradient(135deg, #1a6b8a, #2d9cbf); }
+  .price-card-header.canoe { background: linear-gradient(135deg, #2d5a3d, #3d7a52); }
+  .price-card-header.sup { background: linear-gradient(135deg, #5a3d2d, #8b6f4e); }
+  .price-card-icon { font-size: 2rem; margin-bottom: 8px; }
+  .price-card-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 4px; }
+  .price-card-sub { font-size: 0.8rem; opacity: 0.7; }
+  .price-card-body { padding: 24px; }
+  .price-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(10,61,92,0.07); font-size: 0.9rem; }
+  .price-row:last-child { border-bottom: none; }
+  .price-row .label { color: var(--text-light); }
+  .price-row .price { font-weight: 600; color: var(--ocean); font-size: 1rem; }
+
+  .includes-box { grid-column: 1 / -1; background: linear-gradient(135deg, var(--ocean), var(--ocean-mid)); color: #fff; border-radius: 14px; padding: 32px; margin-top: 10px; }
+  .includes-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px; color: var(--foam); }
+  .includes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .include-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; opacity: 0.9; }
+  .include-item::before { content: '✓'; color: var(--foam); font-weight: 700; flex-shrink: 0; }
+
+  .lessons-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .lesson-card { background: #fff; border-radius: 14px; padding: 30px; border: 1px solid rgba(10,61,92,0.1); transition: box-shadow 0.2s; }
+  .lesson-card:hover { box-shadow: 0 8px 40px rgba(10,61,92,0.12); }
+  .lesson-card.lesson-dark { background: var(--ocean); border-color: var(--ocean-mid); }
+  .lesson-icon { font-size: 2.2rem; margin-bottom: 16px; }
+  .lesson-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--ocean); margin-bottom: 10px; }
+  .lesson-card.lesson-dark .lesson-title { color: var(--foam); }
+  .lesson-desc { font-size: 0.88rem; color: var(--text-light); line-height: 1.65; margin-bottom: 20px; }
+  .lesson-card.lesson-dark .lesson-desc { color: rgba(255,255,255,0.7); }
+  .lesson-price-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .price-pill { background: var(--sand); padding: 6px 14px; border-radius: 100px; font-size: 0.82rem; color: var(--ocean); font-weight: 500; }
+  .price-pill span { color: var(--text-light); font-weight: 400; }
+
+  .tours-grid { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+  .tour-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 20px rgba(10,61,92,0.08); }
+  .tour-card-top { background: linear-gradient(135deg, var(--ocean), #1e7a9a); padding: 30px; color: #fff; position: relative; }
+  .tour-card-top.green { background: linear-gradient(135deg, #2d5a3d, #3d7a52); }
+  .tour-badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: var(--foam); padding: 4px 12px; border-radius: 100px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .tour-card-top.green .tour-badge { color: #c8ebd4; }
+  .tour-card-top h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 6px; }
+  .tour-card-top p { opacity: 0.75; font-size: 0.88rem; line-height: 1.6; }
+  .tour-card-body { padding: 24px; }
+  .tour-pricing-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .tour-pricing-table th { background: var(--sand); padding: 8px 12px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light); text-align: left; }
+  .tour-pricing-table td { padding: 10px 12px; font-size: 0.9rem; border-bottom: 1px solid rgba(10,61,92,0.06); }
+  .tour-pricing-table td strong { color: var(--ocean); }
+  .tour-btn-green { background: #2d5a3d; }
+  .tour-btn-green:hover { background: #3d7a52; }
+
+  /* ── SAFETY ── */
+  .safety { background: var(--ocean); color: #fff; }
+  .safety .section-title { color: var(--foam); }
+  .safety .section-label { color: rgba(168,221,233,0.7); }
+  .safety .section-desc { color: rgba(255,255,255,0.65); max-width: 700px; }
+  .safety-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 50px; }
+  .safety-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 28px; transition: background 0.2s; }
+  .safety-card:hover { background: rgba(255,255,255,0.1); }
+  .safety-card .icon { font-size: 2rem; margin-bottom: 14px; }
+  .safety-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; color: var(--foam); }
+  .safety-card p { font-size: 0.88rem; opacity: 0.7; line-height: 1.65; }
+  .safety-card a { color: var(--foam); }
+
+  /* ── ACCOMMODATION ── */
+  .accommodation { background: #fff; }
+  .accom-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start; margin-top: 50px; }
+  .accom-card { background: var(--sand); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 30px rgba(10,61,92,0.1); }
+  .accom-card-top { background: linear-gradient(135deg, #0a3d5c, #2d9cbf); padding: 36px; color: #fff; }
+  .accom-tag { display: inline-block; background: rgba(255,255,255,0.15); color: var(--foam); padding: 4px 12px; border-radius: 100px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+  .accom-card-top h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 8px; }
+  .accom-card-top p { opacity: 0.75; font-size: 0.9rem; line-height: 1.6; }
+  .accom-card-body { padding: 30px; }
+  .accom-price-box { background: #fff; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+  .accom-price-box h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sea); margin-bottom: 14px; }
+  .accom-price-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.9rem; border-bottom: 1px solid rgba(10,61,92,0.06); }
+  .accom-price-row:last-child { border: none; }
+  .accom-price-row strong { color: var(--ocean); }
+  .accom-features-list { list-style: none; margin-bottom: 24px; }
+  .accom-features-list li { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; font-size: 0.88rem; color: var(--text-light); border-bottom: 1px solid rgba(10,61,92,0.06); }
+  .accom-features-list li::before { content: '→'; color: var(--sea); flex-shrink: 0; font-weight: 600; }
+  .accom-note { font-size: 0.82rem; color: var(--text-light); margin-bottom: 16px; }
+  .hostel-cards { display: flex; flex-direction: column; gap: 16px; }
+  .hostel-card { background: var(--sand); border-radius: 12px; padding: 24px; border-left: 4px solid var(--sea); }
+  .hostel-card.hostel-alt { border-left-color: var(--driftwood); }
+  .hostel-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--ocean); margin-bottom: 10px; }
+  .hostel-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
+  .hostel-prices { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hostel-price { background: var(--ocean); color: #fff; padding: 4px 14px; border-radius: 100px; font-size: 0.82rem; font-weight: 500; }
+
+  /* ── GUIDES ── */
+  .guides { background: var(--sand); }
+  .guides-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; }
+  .guide-card { background: #fff; border-radius: 14px; padding: 36px; display: flex; gap: 24px; align-items: flex-start; box-shadow: 0 2px 20px rgba(10,61,92,0.07); }
+  .guide-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--ocean), var(--sea)); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; color: #fff; }
+  .guide-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--ocean); margin-bottom: 4px; }
+  .guide-role { font-size: 0.8rem; color: var(--sea); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-weight: 500; }
+  .guide-bio { font-size: 0.88rem; color: var(--text-light); line-height: 1.65; }
+
+  /* ── REVIEWS ── */
+  .reviews { background: linear-gradient(160deg, var(--ocean) 0%, #14547a 100%); padding: 90px 5%; }
+  .reviews .section-title { color: var(--foam); }
+  .reviews .section-label { color: rgba(168,221,233,0.65); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 50px; }
+  .review-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 28px; }
+  .stars { color: #ffc44d; font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
+  .review-text { font-size: 0.9rem; color: rgba(255,255,255,0.82); line-height: 1.75; font-style: italic; margin-bottom: 20px; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--sea), var(--foam)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: var(--ocean); flex-shrink: 0; }
+  .reviewer-name { font-weight: 600; color: #fff; font-size: 0.88rem; }
+  .reviewer-loc { font-size: 0.78rem; opacity: 0.55; }
+
+  /* ── BOOKING ── */
+  .booking { background: var(--white); text-align: center; padding: 100px 5%; }
+  .booking .section-title { max-width: 600px; margin: 0 auto 16px; }
+  .booking .section-desc { margin: 0 auto 50px; text-align: center; }
+  .contact-cards { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; }
+  .contact-card { background: #fff; border: 1px solid rgba(10,61,92,0.12); border-radius: 14px; padding: 28px 32px; min-width: 180px; box-shadow: 0 2px 20px rgba(10,61,92,0.06); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; }
+  .contact-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(10,61,92,0.12); }
+  .contact-card .c-icon { font-size: 2rem; margin-bottom: 10px; }
+  .contact-card h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 6px; }
+  .contact-card p { font-size: 0.95rem; font-weight: 600; color: var(--ocean); }
+  .policy-box { background: var(--sand); border-radius: 12px; padding: 30px 36px; max-width: 700px; margin: 0 auto 40px; text-align: left; }
+  .policy-box h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--ocean); margin-bottom: 14px; }
+  .policy-box p { font-size: 0.88rem; color: var(--text-light); line-height: 1.7; margin-bottom: 10px; }
+  .policy-box p:last-child { margin: 0; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--ocean); color: rgba(255,255,255,0.6); padding: 50px 5% 30px; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; }
+  .footer-brand a { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; text-decoration: none; }
+  .footer-brand a span { color: var(--foam); }
+  .footer-brand p { font-size: 0.85rem; margin-top: 8px; max-width: 280px; line-height: 1.6; }
+  .footer-links h4 { color: var(--foam); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+  .footer-links ul { list-style: none; }
+  .footer-links li { margin-bottom: 8px; }
+  .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--foam); }
+  .footer-bottom { text-align: center; font-size: 0.8rem; }
+
+  /* ── GETTING HERE ── */
+  .getting-here { background: #fff; }
+  .location-info { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; align-items: start; }
+  .location-detail { display: flex; gap: 16px; padding: 20px; background: var(--sand); border-radius: 12px; margin-bottom: 14px; }
+  .location-detail .icon { font-size: 1.5rem; flex-shrink: 0; }
+  .location-detail h4 { font-weight: 600; font-size: 0.95rem; color: var(--ocean); margin-bottom: 4px; }
+  .location-detail p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+  .what-to-bring { background: linear-gradient(135deg, var(--kelp), #3d7a52); border-radius: 14px; padding: 28px; color: #fff; }
+  .what-to-bring h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 16px; color: #c8ebd4; }
+  .bring-section { margin-bottom: 14px; }
+  .bring-section h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.65; margin-bottom: 8px; }
+  .bring-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .bring-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 100px; font-size: 0.8rem; color: rgba(255,255,255,0.88); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-stats { display: none; }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .accom-grid { grid-template-columns: 1fr; }
+    .guides-grid { grid-template-columns: 1fr; }
+    .guide-card { flex-direction: column; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 60px 5%; }
+    .hero-content { padding-bottom: 80px; }
+    .about-img-grid img:first-child { height: 200px; }
+    .since-badge { left: 0; bottom: -40px; }
+    .about-visual { padding-bottom: 50px; }
+    .location-info { grid-template-columns: 1fr; }
+    .contact-card { min-width: 140px; padding: 18px; }
+    .policy-box { padding: 24px; }
+    .footer-top { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SEASON BANNER (shown/hidden by admin) -->
+<div id="season-banner" style="display:none;background:var(--ocean);color:#fff;text-align:center;padding:10px 20px;font-size:0.9rem;position:relative;z-index:200;"></div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="nav-mobile-overlay" id="mobile-menu" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+  <button class="nav-mobile-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#services" onclick="closeMobileMenu()">Services &amp; Rates</a>
+  <a href="#accommodation" onclick="closeMobileMenu()">Stay</a>
+  <a href="#guides" onclick="closeMobileMenu()">Our Guides</a>
+  <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
+  <a href="#booking" onclick="closeMobileMenu()" style="color:var(--foam);font-weight:700;">Book Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav" aria-label="Main navigation">
+  <a href="#" class="nav-logo" aria-label="Denman Hornby Canoes &amp; Kayaks – Home">
+    Denman Hornby <span>Canoes &amp; Kayaks</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#accommodation">Stay</a></li>
+    <li><a href="#guides">About Us</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wave-container" aria-hidden="true">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <div class="hero-stats" aria-hidden="true">
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Years of experience</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Custom tours</div></div>
+    <div class="stat"><div class="stat-num">All</div><div class="stat-label">Ages welcome</div></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Denman &amp; Hornby Islands · BC, Canada</div>
+    <h1>Paddle the <em>wild</em><br>West Coast</h1>
+    <p class="hero-sub">Kayak lessons, guided tours, and rentals on the calm waters of Lambert Channel — since 2003. No experience necessary.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">📅 Book Your Adventure</a>
+      <a href="#services" class="btn-outline">View Rates &amp; Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about fade-in" id="about">
+  <div class="about-text">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">Family-owned, West Coast born</h2>
+    <p class="section-desc">Since 2003, the Tancon family has specialized in kayak lessons, rentals, and custom tours. Launching from Denman Island's West side, you're minutes from Chrome Island Lighthouse, Sandy Island Provincial Marine Park, and Hornby Island.</p>
+    <div class="about-features">
+      <div class="feature-card"><div class="icon" aria-hidden="true">🦅</div><h4>Wildlife Encounters</h4><p>Bald Eagles, Harbour Seals, Stellar Sea Lions — and maybe Orca and Humpback whales.</p></div>
+      <div class="feature-card"><div class="icon" aria-hidden="true">🧭</div><h4>Custom Tours</h4><p>Every tour is tailored to your group's needs, fitness level, and interests.</p></div>
+      <div class="feature-card"><div class="icon" aria-hidden="true">👨‍👩‍👧</div><h4>All Ages Welcome</h4><p>Specialist children's lessons in a proper mini kayak — not a wide adult boat.</p></div>
+      <div class="feature-card"><div class="icon" aria-hidden="true">🍽️</div><h4>Home-Cooked Meals</h4><p>Optional meals with local ingredients. Mario has catered weddings!</p></div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="about-img-grid">
+      <img src="https://visitdenmanisland.ca/wp-content/uploads/2016/02/Denman-Kayak-8-MarioSUPLoranieKayak_5517_640x480_2019.jpg"
+           alt="Stand-up paddleboarding on Lambert Channel with Hornby Island in the background"
+           width="640" height="480">
+      <img src="https://visitdenmanisland.ca/wp-content/uploads/2016/02/Denman-Kayak-10_PaigeKateLesson_1398_640x480px_2019.jpg"
+           alt="Kayak lesson on the water near Denman Island"
+           width="640" height="480" loading="lazy">
+      <img src="https://visitdenmanisland.ca/wp-content/uploads/2016/02/Denman-Kayak-1_640x480_2019-1.jpg"
+           alt="Sea kayaking along the Denman Island coastline"
+           width="640" height="480" loading="lazy">
+    </div>
+    <div class="since-badge" aria-label="Established 2003">
+      <div class="year">2003</div>
+      <div class="label">Established</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services fade-in" id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label">Rates &amp; Services</div>
+      <h2 class="section-title">Everything you need<br>on the water</h2>
+    </div>
+    <div role="tablist" aria-label="Service categories">
+      <button role="tab" id="tab-btn-rentals" aria-selected="true"  aria-controls="tab-rentals" tabindex="0"  onclick="showTab('rentals',this)">Rentals</button>
+      <button role="tab" id="tab-btn-lessons" aria-selected="false" aria-controls="tab-lessons" tabindex="-1" onclick="showTab('lessons',this)">Lessons</button>
+      <button role="tab" id="tab-btn-tours"   aria-selected="false" aria-controls="tab-tours"   tabindex="-1" onclick="showTab('tours',this)">Tours</button>
+    </div>
+  </div>
+
+  <!-- RENTALS -->
+  <div role="tabpanel" id="tab-rentals" aria-labelledby="tab-btn-rentals" class="price-grid active">
+    <div class="price-card">
+      <div class="price-card-header kayak"><div class="price-card-icon" aria-hidden="true">🛶</div><div class="price-card-name">Single Kayak</div><div class="price-card-sub">Perfect for solo exploration</div></div>
+      <div class="price-card-body">
+        <div class="price-row"><span class="label">Half Day</span><span class="price">$60</span></div>
+        <div class="price-row"><span class="label">Full Day</span><span class="price">$80</span></div>
+        <div class="price-row"><span class="label">24 Hours</span><span class="price">$90</span></div>
+        <div class="price-row"><span class="label">Multi-day (each day after 1st)</span><span class="price">$60</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="price-card-header double" id="pc-dk"><div class="price-card-icon" aria-hidden="true">🚣</div><div class="price-card-name">Double Kayak</div><div class="price-card-sub">Ideal for couples &amp; families</div></div>
+      <div class="price-card-body">
+        <div class="price-row"><span class="label">Half Day</span><span class="price" data-price="p-dk-half">$100</span></div>
+        <div class="price-row"><span class="label">Full Day</span><span class="price" data-price="p-dk-full">$120</span></div>
+        <div class="price-row"><span class="label">24 Hours</span><span class="price" data-price="p-dk-24">$130</span></div>
+        <div class="price-row"><span class="label">Multi-day (each day after 1st)</span><span class="price" data-price="p-dk-multi">$100</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="price-card-header canoe"><div class="price-card-icon" aria-hidden="true">⛵</div><div class="price-card-name">Canoe</div><div class="price-card-sub">Classic paddling experience</div></div>
+      <div class="price-card-body">
+        <div class="price-row"><span class="label">Half Day</span><span class="price" data-price="p-cn-half">$60</span></div>
+        <div class="price-row"><span class="label">Full Day</span><span class="price" data-price="p-cn-full">$80</span></div>
+        <div class="price-row"><span class="label">24 Hours</span><span class="price" data-price="p-cn-24">$80</span></div>
+        <div class="price-row"><span class="label">Multi-day (each day after 1st)</span><span class="price" data-price="p-cn-multi">$50</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="price-card-header sup"><div class="price-card-icon" aria-hidden="true">🏄</div><div class="price-card-name">Stand-Up Paddleboard</div><div class="price-card-sub">Great core workout &amp; views</div></div>
+      <div class="price-card-body">
+        <div class="price-row"><span class="label">Half Day</span><span class="price" data-price="p-sup-half">$60</span></div>
+        <div class="price-row"><span class="label">Full Day</span><span class="price" data-price="p-sup-full">$80</span></div>
+        <div class="price-row"><span class="label">24 Hours</span><span class="price" data-price="p-sup-24">$90</span></div>
+        <div class="price-row"><span class="label">Multi-day</span><span class="price">—</span></div>
+      </div>
+    </div>
+    <div class="includes-box">
+      <h3>All rentals include</h3>
+      <div class="includes-grid">
+        <div class="include-item">½ hour dry land safety &amp; technique lesson</div>
+        <div class="include-item">Nautical chart</div>
+        <div class="include-item">PFD life jacket, spray skirt &amp; paddle</div>
+        <div class="include-item">Waterproof box for phone &amp; wallet</div>
+        <div class="include-item">Gloves, floats &amp; pump</div>
+        <div class="include-item">Dry bags</div>
+        <div class="include-item">Fresh drinking water on site</div>
+        <div class="include-item">Custom boat pick-up/drop-off from $25</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSONS -->
+  <div role="tabpanel" id="tab-lessons" aria-labelledby="tab-btn-lessons" class="lessons-grid">
+    <div class="lesson-card"><div class="lesson-icon" aria-hidden="true">🌊</div><h3 class="lesson-title">Introductory Kayak Lesson</h3><p class="lesson-desc">Basic paddling strokes, water safety, and boat handling. Includes a 30-minute dry-land component. All rentals already include this lesson.</p><div class="lesson-price-row"><div class="price-pill">Adult <span data-lesson="l-intro-adult">$100</span></div><div class="price-pill">Teen <span data-lesson="l-intro-teen">$75</span></div><div class="price-pill">Child <span data-lesson="l-intro-child">$50</span></div><div class="price-pill">1 child 1hr <span data-lesson="l-child-1hr">$60</span></div></div></div>
+    <div class="lesson-card"><div class="lesson-icon" aria-hidden="true">🧒</div><h3 class="lesson-title">Custom Children's Lesson</h3><p class="lesson-desc">A specialty here. Your child learns in a real mini kayak — not a wide adult boat. Dry land session, then bay paddling at high tide, leading into a coastal paddle.</p><div class="lesson-price-row"><div class="price-pill">1st child <span data-lesson="l-kids-1">$60</span></div><div class="price-pill">2nd child <span data-lesson="l-kids-2">$50</span></div></div></div>
+    <div class="lesson-card"><div class="lesson-icon" aria-hidden="true">💪</div><h3 class="lesson-title">Strokes &amp; Edging</h3><p class="lesson-desc">Drawing, sculling, sweep strokes and edging skills. Learn to manoeuvre sideways, backward, and through turns with precision.</p><div class="lesson-price-row"><div class="price-pill">Adult <span data-lesson="l-adv-adult">$100</span></div><div class="price-pill">Teen <span data-lesson="l-adv-teen">$75</span></div></div></div>
+    <div class="lesson-card"><div class="lesson-icon" aria-hidden="true">🏊</div><h3 class="lesson-title">Advanced Rescues</h3><p class="lesson-desc">2 self-rescues and 3 two-person rescues. Practice wet exits so you're prepared for a real capsize. Half wetsuits provided if needed.</p><div class="lesson-price-row"><div class="price-pill">Adult <span data-lesson="l-adv-adult">$100</span></div><div class="price-pill">Teen <span data-lesson="l-adv-teen">$75</span></div></div></div>
+    <div class="lesson-card"><div class="lesson-icon" aria-hidden="true">🌀</div><h3 class="lesson-title">Kayak Rolling</h3><p class="lesson-desc">Step-by-step instruction with guides in the water alongside you. Technique-based and challenging — an excellent goal for advancing paddlers.</p><div class="lesson-price-row"><div class="price-pill">Adult <span data-lesson="l-adv-adult">$100</span></div><div class="price-pill">Teen <span data-lesson="l-adv-teen">$75</span></div></div></div>
+    <div class="lesson-card lesson-dark"><div class="lesson-icon" aria-hidden="true">📋</div><h3 class="lesson-title">Good to know</h3><p class="lesson-desc">Teen &amp; Child discounts apply only alongside a full-price adult. All prices include tax. Book ahead for advanced training. Same-day rentals: text 250-335-0079.</p><div class="lesson-price-row"><a href="#booking" class="btn-primary" style="margin-top:10px;">Book a Lesson</a></div></div>
+  </div>
+
+  <!-- TOURS -->
+  <div role="tabpanel" id="tab-tours" aria-labelledby="tab-btn-tours" class="tours-grid">
+    <div class="tour-card">
+      <div class="tour-card-top"><div class="tour-badge">Most popular</div><h3>Kayak Tour</h3><p>Visit Chrome Island Lighthouse, Eagle Rock, Sandy Island Marine Park. Spot eagles, seals, sea lions — possibly whales. Paced for all fitness levels.</p></div>
+      <div class="tour-card-body">
+        <table class="tour-pricing-table"><thead><tr><th scope="col">Duration</th><th scope="col">Adult</th><th scope="col">Teen</th><th scope="col">Child</th></tr></thead><tbody><tr><td>Half Day (4 hrs)</td><td data-tour="t-k-hd-adult"><strong>$150</strong></td><td data-tour="t-k-hd-teen"><strong>$100</strong></td><td data-tour="t-k-hd-child"><strong>$75</strong></td></tr><tr><td>Full Day</td><td data-tour="t-k-fd-adult"><strong>$200</strong></td><td data-tour="t-k-fd-teen"><strong>$150</strong></td><td data-tour="t-k-fd-child"><strong>$100</strong></td></tr></tbody></table>
+        <a href="#booking" class="btn-primary" style="width:100%;text-align:center;display:block;">Book This Tour</a>
+      </div>
+    </div>
+    <div class="tour-card">
+      <div class="tour-card-top green"><div class="tour-badge">Signature experience</div><h3>Welcome to Denman Island</h3><p>Custom full or half day: beach walks, swimming, SUP intro, kayak lesson in our natural bay, and a sunset paddle. Photos included.</p></div>
+      <div class="tour-card-body">
+        <table class="tour-pricing-table"><thead><tr><th scope="col">Duration</th><th scope="col">Adult</th><th scope="col">Teen</th><th scope="col">Child</th></tr></thead><tbody><tr><td>Half Day (4 hrs)</td><td data-tour="t-w-hd-adult"><strong>$125</strong></td><td data-tour="t-w-hd-teen"><strong>$85</strong></td><td data-tour="t-w-hd-child"><strong>$65</strong></td></tr><tr><td>Full Day</td><td data-tour="t-w-fd-adult"><strong>$160</strong></td><td data-tour="t-w-fd-teen"><strong>$110</strong></td><td data-tour="t-w-fd-child"><strong>$85</strong></td></tr></tbody></table>
+        <a href="#booking" class="btn-primary tour-btn-green" style="width:100%;text-align:center;display:block;">Book This Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="safety fade-in" id="safety">
+  <div class="section-label">Safety</div>
+  <h2 class="section-title">Plan ahead — you're on the ocean</h2>
+  <p class="section-desc">Paddling on Lambert Channel is all about wind and tides. Here's what every paddler should know before launching.</p>
+  <div class="safety-cards">
+    <div class="safety-card"><div class="icon" aria-hidden="true">🌬️</div><h3>Check Wind Conditions</h3><p>Get predictions via <a href="https://weather.gc.ca/marine/forecast_e.html?mapID=03&siteID=14301&stationID=yvr" target="_blank" rel="noopener noreferrer">Marine Weather — North of Nanaimo</a>. Wind can be over- or under-forecast for Denman specifically.</p></div>
+    <div class="safety-card"><div class="icon" aria-hidden="true">📊</div><h3>Check Tide Heights</h3><p>Use <a href="https://tides.gc.ca/" target="_blank" rel="noopener noreferrer">Fisheries Canada Tides &amp; Water Levels</a> — search for <em>Hornby Island Tide Heights</em> for our location.</p></div>
+    <div class="safety-card"><div class="icon" aria-hidden="true">⚠️</div><h3>Don't Launch at Very Low Tide</h3><p>Our rental boats are heavy. Launching below a 12-foot tide can be slippery with dangerous exposed barnacles. Plan your timing carefully.</p></div>
+    <div class="safety-card"><div class="icon" aria-hidden="true">🕐</div><h3>Island Time is Real</h3><p>The ferry often runs off schedule with line-ups in spring and summer. Build in buffer time, especially if you're coming from off-island.</p></div>
+  </div>
+</section>
+
+<!-- ACCOMMODATION -->
+<section class="accommodation fade-in" id="accommodation">
+  <div class="section-label">Stay With Us</div>
+  <h2 class="section-title">Sleep where you paddle</h2>
+  <p class="section-desc">All accommodation includes a half day boat or bike rental per night booked. Located at 4005 East Road, 10 minutes from the Buckley Bay ferry.</p>
+  <div class="accom-grid">
+    <div class="accom-card">
+      <div class="accom-card-top">
+        <div class="accom-tag">⭐ Featured</div>
+        <h3>Paddler's Paradise Studio Cabin</h3>
+        <p>Nestled in the trees with views over Lambert Channel and Hornby Island. Indoor bathroom with heated tiled floor and shower — new 2022.</p>
+      </div>
+      <div class="accom-card-body">
+        <div class="accom-price-box">
+          <h4>July / August Rates (min. 3 nights)</h4>
+          <div class="accom-price-row"><span>1 person</span><strong data-accom="a-cabin-1">$150 / night</strong></div>
+          <div class="accom-price-row"><span>2 people</span><strong data-accom="a-cabin-2">$175 / night</strong></div>
+          <div class="accom-price-row"><span>3 adults or 2 adults + 2 children</span><strong data-accom="a-cabin-3">$200 / night</strong></div>
+          <div class="accom-price-row"><span>Kayak/canoe/SUP rental discount</span><strong>25% off</strong></div>
+        </div>
+        <ul class="accom-features-list">
+          <li>Open concept studio with character wood finishes</li>
+          <li>Kitchenette: fridge, hot plate, microwave, coffee maker, kettle, sink</li>
+          <li>Queen bed + 2 single mattresses on request</li>
+          <li>New 2022: indoor bathroom with heated tiled floor, shower &amp; toilet</li>
+          <li>Private patio in a natural garden forest</li>
+          <li>Cold water rinse station on deck after beach days</li>
+          <li>Quiet, well-behaved dogs welcome ($50 pet fee per visit)</li>
+          <li>Children 10 years and up welcome</li>
+        </ul>
+        <p class="accom-note">A minimum prepaid paddling session ($45) is required per booking. Work-trade arrangements may be available — email to enquire.</p>
+        <a href="#booking" class="btn-primary">Check Availability</a>
+      </div>
+    </div>
+    <div class="hostel-cards">
+      <div class="hostel-card"><h3>🏠 Paddler's Hostel — Tancon Home</h3><p>Simple, comfortable rooms with hot shower at 4005 Denman Road. Tenters also welcome. Home-cooked meals with local ingredients available on request.</p></div>
+      <div class="hostel-card"><h3>🔒 Private Hostel Room</h3><p>Private accommodation with cooking facility, indoor or outdoor shower and toilet. Includes half day boat rental. Fri/Sat and long weekends add $10/night in July &amp; August.</p><div class="hostel-prices"><span class="hostel-price">Single <span data-accom-raw="a-hostel-s">$120</span></span><span class="hostel-price">Double <span data-accom-raw="a-hostel-d">$200</span></span><span class="hostel-price">Triple <span data-accom-raw="a-hostel-t">$255</span></span></div></div>
+      <div class="hostel-card hostel-alt"><h3>📍 Location &amp; Explore</h3><p>5 min to Graham Lake &amp; Chrome Island trail. 5 min to Hornby ferry. 9 min to grocery store. 5 min to Farmer's Market. 6 min to Filongley Provincial Park.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GETTING HERE / WHAT TO BRING -->
+<section class="getting-here fade-in" id="getting-here">
+  <div class="section-label">Practical Info</div>
+  <h2 class="section-title">Getting here &amp; what to bring</h2>
+  <div class="location-info">
+    <div>
+      <div class="location-detail"><div class="icon" aria-hidden="true">📍</div><div><h4>Address</h4><p>4005 East Road, Denman Island, BC<br>West side of the island, launching on Lambert Channel</p></div></div>
+      <div class="location-detail"><div class="icon" aria-hidden="true">⛴️</div><div><h4>By Ferry</h4><p>10 minutes from Buckley Bay ferry. Ferries often run off schedule in spring and summer — allow extra time.</p></div></div>
+      <div class="location-detail"><div class="icon" aria-hidden="true">🏖️</div><div><h4>Launch Spot</h4><p>Natural paddling bay in front of the property. Best launched at high tide — check Hornby Island tide heights first.</p></div></div>
+    </div>
+    <div class="what-to-bring">
+      <h3>What to bring</h3>
+      <div class="bring-section"><h4>Wear &amp; footwear</h4><div class="bring-tags"><span class="bring-tag">Closed-toe sandals (can get wet)</span><span class="bring-tag">Bathing suit</span><span class="bring-tag">Warm layers</span><span class="bring-tag">Hat</span><span class="bring-tag">Sunscreen</span><span class="bring-tag">Glasses strap</span><span class="bring-tag">Towel</span></div></div>
+      <div class="bring-section"><h4>Gear &amp; essentials</h4><div class="bring-tags"><span class="bring-tag">Camera</span><span class="bring-tag">Water bottle</span><span class="bring-tag">Food / snacks</span><span class="bring-tag">Cash (for Hornby Island)</span></div></div>
+      <div class="bring-section"><h4>We provide</h4><div class="bring-tags"><span class="bring-tag">PFDs</span><span class="bring-tag">Spray skirts</span><span class="bring-tag">Paddles</span><span class="bring-tag">Gloves</span><span class="bring-tag">Dry-bags</span><span class="bring-tag">Phone waterproof case</span><span class="bring-tag">Nautical chart</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDES -->
+<section class="guides fade-in" id="guides">
+  <div class="section-label">Your Guides</div>
+  <h2 class="section-title">The Tancon Family</h2>
+  <p class="section-desc">Experienced paddlers, teachers, and parents providing a welcoming, safe, and memorable water experience since 2003.</p>
+  <div class="guides-grid">
+    <div class="guide-card"><div class="guide-avatar" aria-hidden="true">🏅</div><div class="guide-info"><h3>Melodie Tancon</h3><div class="guide-role">Certified Kayak Guide &amp; Canoe Instructor</div><p class="guide-bio">Previously with Strathcona Park Lodge's outdoor education program. Melodie has deep experience teaching everyone from Grade 3 students to seniors, and is passionate about local ecology, wildlife, and the environment.</p></div></div>
+    <div class="guide-card"><div class="guide-avatar" aria-hidden="true">⚓</div><div class="guide-info"><h3>Mario Tancon</h3><div class="guide-role">Guide, Builder &amp; Chef</div><p class="guide-bio">Grew up on the coast in Campbell River working on and around all types of boats. Mario built the home base using trees from the property, brings extensive local environmental knowledge — and a passion for cooking and catering.</p></div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews fade-in" id="reviews">
+  <div class="section-label">What guests say</div>
+  <h2 class="section-title">Five-star adventures</h2>
+  <div class="reviews-grid">
+    <div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">"Nothing short of amazing. Melodie covered everything from getting in to getting out. Sunset, mirror-like water, and wine. We will absolutely return."</p><div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">S</div><div><div class="reviewer-name">Sofia P.</div><div class="reviewer-loc">Cabin guest &amp; kayak rental</div></div></div></div>
+    <div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">"We stayed an extra day because of Melodie's recommendations. Paddled to a beautiful sandy island, swam, hiked, and slept under the full moon. Unforgettable."</p><div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">J</div><div><div class="reviewer-name">Jennifer C.</div><div class="reviewer-loc">Kayak tour guest</div></div></div></div>
+    <div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">"Took our two teenage girls on a half-day sunset tour with Nick. He was informative, safety-focused, and the scenery was breathtaking. Melodie was wonderful to book with."</p><div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">E</div><div><div class="reviewer-name">Erin P.</div><div class="reviewer-loc">Family kayak tour</div></div></div></div>
+    <div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">"While paddling I saw 4 otters popping their heads up — making the funniest noises, like they were arguing! One of the best water experiences I've ever had."</p><div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">M</div><div><div class="reviewer-name">Michelle M.</div><div class="reviewer-loc">Solo kayak rental</div></div></div></div>
+    <div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">"So much fun! Melodie was a pro and so easy going. Thanks for an amazing experience in an even more amazing place."</p><div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">K</div><div><div class="reviewer-name">Kayla D.</div><div class="reviewer-loc">Kayak lesson guest</div></div></div></div>
+    <div class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="review-text">"Melodie and Mario were wonderful hosts on a perfect afternoon on the water. Loved seeing the wildlife and a whole new view of Denman and Hornby. Already planning our return."</p><div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">D</div><div><div class="reviewer-name">Donna R.</div><div class="reviewer-loc">Richmond, BC</div></div></div></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking fade-in" id="booking">
+  <div class="section-label">Contact &amp; Booking</div>
+  <h2 class="section-title">Ready to paddle?</h2>
+  <p class="section-desc">Book ahead to reserve your adventure. A 50% non-refundable deposit confirms your booking. All prices include tax. Cash, cheques and e-transfers accepted.</p>
+  <div class="contact-cards">
+    <a href="tel:+12503350079" class="contact-card" data-contact-card="phone1"><div class="c-icon" aria-hidden="true">📞</div><h4>Call Us</h4><p data-contact="phone1">250-335-0079</p></a>
+    <a href="tel:+12507020530" class="contact-card" data-contact-card="phone2"><div class="c-icon" aria-hidden="true">📱</div><h4>Alternate / Text</h4><p data-contact="phone2">250-702-0530</p></a>
+    <a href="mailto:denmanpaddling@gmail.com" class="contact-card" data-contact-card="email"><div class="c-icon" aria-hidden="true">✉️</div><h4>Email</h4><p data-contact="email">denmanpaddling@gmail.com</p></a>
+    <a href="http://denmanpaddling.ca" target="_blank" rel="noopener noreferrer" class="contact-card"><div class="c-icon" aria-hidden="true">🌐</div><h4>Website</h4><p>denmanpaddling.ca</p></a>
+  </div>
+  <div class="policy-box">
+    <h3>Cancellation &amp; Refund Policy</h3>
+    <p>A <strong>50% non-refundable deposit</strong> by e-transfer, cheque, or cash is required at booking to ensure guide and equipment availability.</p>
+    <p>Deposit is <strong>fully refunded</strong> if: (A) conditions are deemed unsafe by Denman Hornby Canoes &amp; Kayaks, or (B) we need to cancel. In both cases we will first seek to reschedule.</p>
+    <p>If your plans change, we will do our best to accommodate a reschedule — but availability cannot be guaranteed and the 50% deposit will not be refunded.</p>
+  </div>
+  <a href="mailto:denmanpaddling@gmail.com?subject=Booking%20Request%20%E2%80%93%20Denman%20Hornby%20Canoes%20%26%20Kayaks&body=Hi%20Melodie%20and%20Mario%2C%0A%0AI%20would%20like%20to%20book%3A%0A%0AActivity%3A%20%0ADate(s)%3A%20%0AGroup%20size%20(adults%20%2F%20teens%20%2F%20children)%3A%20%0AAccommodation%20(if%20needed)%3A%20%0ASpecial%20requests%3A%20%0A%0AThanks!" class="btn-primary" style="font-size:1.05rem;padding:18px 40px;">📧 Send Booking Request</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#">Denman Hornby <span>Canoes &amp; Kayaks</span> Ltd.</a>
+      <p>4005 East Road, Denman Island, BC · Launching on Lambert Channel since 2003.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Services</h4>
+      <ul><li><a href="#services">Kayak Rentals</a></li><li><a href="#services">Canoe Rentals</a></li><li><a href="#services">SUP Rentals</a></li><li><a href="#services">Lessons</a></li><li><a href="#services">Guided Tours</a></li></ul>
+    </div>
+    <div class="footer-links">
+      <h4>Plan Your Visit</h4>
+      <ul><li><a href="#safety">Safety &amp; Tides</a></li><li><a href="#getting-here">Getting Here</a></li><li><a href="#accommodation">Accommodation</a></li><li><a href="http://denmanpaddling.ca" target="_blank" rel="noopener noreferrer">denmanpaddling.ca</a></li><li><a href="https://visitdenmanisland.ca" target="_blank" rel="noopener noreferrer">visitdenmanisland.ca</a></li></ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <ul><li><a href="tel:+12503350079" data-contact="phone1">250-335-0079</a></li><li><a href="tel:+12507020530" data-contact="phone2">250-702-0530</a></li><li><a href="mailto:denmanpaddling@gmail.com" data-contact="email">denmanpaddling@gmail.com</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span id="footer-year"></span> Denman Hornby Canoes &amp; Kayaks Ltd. · Denman Island, British Columbia, Canada · On the traditional unceded territory of the Pentlach people.</p>
+    <p style="margin-top:8px;"><a href="admin.html" style="color:rgba(255,255,255,0.1);font-size:0.65rem;text-decoration:none;">·</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Dynamic copyright year */
+  var yearEl = document.getElementById('footer-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* Sticky nav */
+  var mainNav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function () {
+    mainNav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* Accessible tabs */
+  window.showTab = function (name, clickedBtn) {
+    document.querySelectorAll('[role="tabpanel"]').forEach(function (p) { p.classList.remove('active'); });
+    document.querySelectorAll('[role="tab"]').forEach(function (t) {
+      t.setAttribute('aria-selected', 'false');
+      t.setAttribute('tabindex', '-1');
+    });
+    var panel = document.getElementById('tab-' + name);
+    if (panel) panel.classList.add('active');
+    if (clickedBtn) {
+      clickedBtn.setAttribute('aria-selected', 'true');
+      clickedBtn.setAttribute('tabindex', '0');
+    }
+  };
+
+  /* Keyboard navigation for tablist (Arrow keys) */
+  var tablist = document.querySelector('[role="tablist"]');
+  if (tablist) {
+    tablist.addEventListener('keydown', function (e) {
+      var tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+      var idx = tabs.indexOf(document.activeElement);
+      if (idx === -1) return;
+      var next = -1;
+      if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+      if (e.key === 'ArrowLeft')  next = (idx - 1 + tabs.length) % tabs.length;
+      if (next !== -1) { tabs[next].focus(); tabs[next].click(); }
+    });
+  }
+
+  /* Mobile menu */
+  var hamburger  = document.getElementById('hamburger-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var mobileClose = document.getElementById('mobile-menu-close');
+
+  function openMobileMenu() {
+    mobileMenu.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    mobileClose.focus();
+  }
+
+  window.closeMobileMenu = function () {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    hamburger.focus();
+  };
+
+  if (hamburger)   hamburger.addEventListener('click', openMobileMenu);
+  if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu();
+  });
+
+  /* Scroll-reveal – with fallback for browsers without IntersectionObserver */
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.fade-in').forEach(function (el) { el.classList.add('visible'); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(function (el) { observer.observe(el); });
+
+}());
+
+/* ── LOAD LIVE DATA FROM ADMIN PANEL ── */
+(function () {
+  var STORAGE_KEY = 'dhck_site_data';
+  var DEFAULTS = {
+    phone1:'250-335-0079', phone2:'250-702-0530', email1:'denmanpaddling@gmail.com',
+    'p-sk-half':60,'p-sk-full':80,'p-sk-24':90,'p-sk-multi':60,
+    'p-dk-half':100,'p-dk-full':120,'p-dk-24':130,'p-dk-multi':100,
+    'p-cn-half':60,'p-cn-full':80,'p-cn-24':80,'p-cn-multi':50,
+    'p-sup-half':60,'p-sup-full':80,'p-sup-24':90,
+    'l-intro-adult':100,'l-intro-teen':75,'l-intro-child':50,'l-child-1hr':60,
+    'l-kids-1':60,'l-kids-2':50,'l-adv-adult':100,'l-adv-teen':75,
+    't-k-hd-adult':150,'t-k-hd-teen':100,'t-k-hd-child':75,
+    't-k-fd-adult':200,'t-k-fd-teen':150,'t-k-fd-child':100,
+    't-w-hd-adult':125,'t-w-hd-teen':85,'t-w-hd-child':65,
+    't-w-fd-adult':160,'t-w-fd-teen':110,'t-w-fd-child':85,
+    'a-cabin-1':150,'a-cabin-2':175,'a-cabin-3':200,
+    'a-hostel-s':120,'a-hostel-d':200,'a-hostel-t':255
+  };
+
+  function getData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch(e) { return {}; }
+  }
+
+  function val(key, d) {
+    return (d[key] !== undefined) ? d[key] : DEFAULTS[key];
+  }
+
+  var d = getData();
+
+  /* --- prices via data-price attribute --- */
+  document.querySelectorAll('[data-price]').forEach(function(el) {
+    var key = el.getAttribute('data-price');
+    if (DEFAULTS[key] !== undefined) el.textContent = '$' + val(key, d);
+  });
+
+  /* --- price pills in lessons (by data-lesson) --- */
+  var lessonMap = {
+    'l-intro-adult':'l-intro-adult','l-intro-teen':'l-intro-teen',
+    'l-intro-child':'l-intro-child','l-child-1hr':'l-child-1hr',
+    'l-kids-1':'l-kids-1','l-kids-2':'l-kids-2',
+    'l-adv-adult':'l-adv-adult','l-adv-teen':'l-adv-teen'
+  };
+  document.querySelectorAll('[data-lesson]').forEach(function(el) {
+    var key = el.getAttribute('data-lesson');
+    if (lessonMap[key]) el.textContent = '$' + val(key, d);
+  });
+
+  /* --- tour table cells --- */
+  document.querySelectorAll('[data-tour]').forEach(function(el) {
+    var key = el.getAttribute('data-tour');
+    if (DEFAULTS[key] !== undefined) el.innerHTML = '<strong>$' + val(key, d) + '</strong>';
+  });
+
+  /* --- accommodation prices --- */
+  document.querySelectorAll('[data-accom]').forEach(function(el) {
+    var key = el.getAttribute('data-accom');
+    if (DEFAULTS[key] !== undefined) el.textContent = '$' + val(key, d) + ' / night';
+  });
+  document.querySelectorAll('[data-accom-raw]').forEach(function(el) {
+    var key = el.getAttribute('data-accom-raw');
+    if (DEFAULTS[key] !== undefined) el.textContent = '$' + val(key, d);
+  });
+
+  /* --- contact info --- */
+  var phone1 = val('phone1', d);
+  var phone2 = val('phone2', d);
+  var email  = val('email1', d);
+  document.querySelectorAll('[data-contact="phone1"]').forEach(function(el){
+    el.textContent = phone1;
+    if (el.tagName === 'A') el.href = 'tel:+1' + phone1.replace(/[^0-9]/g,'');
+  });
+  document.querySelectorAll('[data-contact="phone2"]').forEach(function(el){
+    el.textContent = phone2;
+    if (el.tagName === 'A') el.href = 'tel:+1' + phone2.replace(/[^0-9]/g,'');
+  });
+  document.querySelectorAll('[data-contact="email"]').forEach(function(el){
+    el.textContent = email;
+    if (el.tagName === 'A') el.href = 'mailto:' + email;
+  });
+
+  /* --- season banner --- */
+  var banner = document.getElementById('season-banner');
+  var mode = d['bannerMode'] || 'off';
+  var messages = {
+    'open':   '✅ We are open for the season! Call or email to book your adventure.',
+    'closed': '❄️ We are closed for the winter season. Check back in spring!',
+    'custom': d['bannerText'] || ''
+  };
+  if (mode !== 'off' && messages[mode]) {
+    banner.textContent = messages[mode];
+    banner.style.display = 'block';
+  }
+
+}());
+
+</script>
+</body>
+</html>

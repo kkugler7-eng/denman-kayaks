@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Website Admin – Denman Hornby Canoes &amp; Kayaks</title>
+<style>
+  :root {
+    --ocean: #0a3d5c;
+    --sea: #2d9cbf;
+    --sand: #f5ede0;
+    --green: #2d5a3d;
+    --green-light: #e8f5ec;
+    --red: #b94040;
+    --red-light: #fdf0f0;
+    --text: #1a2530;
+    --text-light: #4a6274;
+    --border: #d0dde6;
+    --white: #fafcfd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #eef3f7; color: var(--text); min-height: 100vh; }
+
+  /* ── LOGIN SCREEN ── */
+  #login-screen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .login-box {
+    background: #fff; border-radius: 16px; padding: 48px 40px;
+    box-shadow: 0 4px 40px rgba(10,61,92,0.12);
+    width: 100%; max-width: 380px; text-align: center;
+  }
+  .login-logo { font-size: 3rem; margin-bottom: 16px; }
+  .login-box h1 { font-size: 1.3rem; color: var(--ocean); margin-bottom: 6px; }
+  .login-box p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 32px; }
+  .login-box label { display: block; text-align: left; font-size: 0.85rem; font-weight: 600; color: var(--ocean); margin-bottom: 6px; }
+  .login-box input[type="password"] {
+    width: 100%; padding: 14px 16px; border: 2px solid var(--border);
+    border-radius: 8px; font-size: 1rem; outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+  .login-box input[type="password"]:focus { border-color: var(--sea); }
+  .login-btn {
+    width: 100%; margin-top: 20px; padding: 14px;
+    background: var(--ocean); color: #fff; border: none;
+    border-radius: 8px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: background 0.2s; font-family: inherit;
+  }
+  .login-btn:hover { background: #1a5a80; }
+  .login-error {
+    display: none; background: var(--red-light); color: var(--red);
+    border: 1px solid #f0c0c0; border-radius: 8px; padding: 10px 14px;
+    font-size: 0.88rem; margin-top: 14px;
+  }
+
+  /* ── ADMIN PANEL ── */
+  #admin-panel { display: none; }
+
+  .admin-header {
+    background: var(--ocean); color: #fff;
+    padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .admin-header h1 { font-size: 1.1rem; }
+  .admin-header span { font-size: 0.8rem; opacity: 0.65; display: block; margin-top: 2px; }
+  .header-btns { display: flex; gap: 10px; }
+  .btn-logout {
+    background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 0.88rem;
+    font-family: inherit; transition: background 0.2s;
+  }
+  .btn-logout:hover { background: rgba(255,255,255,0.22); }
+  .btn-view-site {
+    background: var(--sea); color: #fff; border: none;
+    padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 0.88rem;
+    font-family: inherit; text-decoration: none; display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-view-site:hover { background: #39aed0; }
+
+  .admin-body { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  .admin-intro {
+    background: #fff; border-radius: 12px; padding: 24px 28px;
+    border-left: 4px solid var(--sea); margin-bottom: 28px;
+    font-size: 0.92rem; color: var(--text-light); line-height: 1.65;
+  }
+  .admin-intro strong { color: var(--ocean); }
+
+  /* sections */
+  .admin-section {
+    background: #fff; border-radius: 12px; margin-bottom: 20px;
+    box-shadow: 0 1px 8px rgba(10,61,92,0.07); overflow: hidden;
+  }
+  .section-header {
+    padding: 18px 24px; background: var(--sand);
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border); cursor: pointer;
+    user-select: none;
+  }
+  .section-header .s-icon { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1rem; color: var(--ocean); }
+  .section-header .s-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; }
+  .section-header .chevron { margin-left: auto; font-size: 1.1rem; color: var(--text-light); transition: transform 0.2s; }
+  .section-header.open .chevron { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: none; }
+  .section-body.open { display: block; }
+
+  /* form elements */
+  .field-group { margin-bottom: 20px; }
+  .field-label { font-size: 0.82rem; font-weight: 600; color: var(--ocean); margin-bottom: 6px; display: block; }
+  .field-hint { font-size: 0.76rem; color: var(--text-light); margin-bottom: 6px; }
+  .field-input, .field-textarea {
+    width: 100%; padding: 12px 14px;
+    border: 2px solid var(--border); border-radius: 8px;
+    font-size: 0.95rem; font-family: inherit; outline: none;
+    transition: border-color 0.2s; color: var(--text);
+    background: #fff;
+  }
+  .field-input:focus, .field-textarea:focus { border-color: var(--sea); }
+  .field-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+  .price-grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .price-field { }
+  .price-field .field-label { margin-bottom: 4px; }
+  .price-input-wrap { display: flex; align-items: center; }
+  .price-prefix { background: var(--sand); border: 2px solid var(--border); border-right: none; padding: 12px 12px; border-radius: 8px 0 0 8px; font-weight: 600; color: var(--ocean); font-size: 1rem; }
+  .price-input-wrap .field-input { border-radius: 0 8px 8px 0; }
+
+  /* save button */
+  .save-section {
+    padding: 20px 24px; background: var(--green-light);
+    border-top: 1px solid #c5e0cc; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .btn-save {
+    background: var(--green); color: #fff; border: none;
+    padding: 12px 28px; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; font-family: inherit; transition: background 0.2s;
+  }
+  .btn-save:hover { background: #3d7a52; }
+  .save-msg { font-size: 0.88rem; color: var(--green); font-weight: 500; display: none; }
+  .save-msg.show { display: block; }
+
+  /* password change */
+  .pw-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .pw-msg { font-size: 0.88rem; margin-top: 10px; padding: 10px 14px; border-radius: 8px; display: none; }
+  .pw-msg.success { background: var(--green-light); color: var(--green); border: 1px solid #c5e0cc; display: block; }
+  .pw-msg.error { background: var(--red-light); color: var(--red); border: 1px solid #f0c0c0; display: block; }
+
+  /* notice / season banner */
+  .notice-options { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .notice-opt { padding: 8px 16px; border-radius: 100px; border: 2px solid var(--border); cursor: pointer; font-size: 0.85rem; background: #fff; font-family: inherit; transition: all 0.15s; }
+  .notice-opt.active { background: var(--ocean); color: #fff; border-color: var(--ocean); }
+
+  /* help tips */
+  .tip-box { background: #e8f4fb; border-left: 3px solid var(--sea); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 0.83rem; color: #2a5a72; line-height: 1.6; margin-top: 10px; }
+  .tip-box strong { color: var(--ocean); }
+
+
+  /* publish section */
+  .publish-section {
+    background: linear-gradient(135deg, #0a3d5c, #1a6b8a);
+    border-radius: 16px; padding: 32px; margin-bottom: 28px;
+    color: #fff; text-align: center;
+  }
+  .publish-section .ex-icon { font-size: 3rem; margin-bottom: 12px; }
+  .publish-section h2 { font-size: 1.3rem; margin-bottom: 8px; }
+  .publish-section p { opacity: 0.8; font-size: 0.92rem; margin-bottom: 24px; line-height: 1.6; }
+  .btn-publish {
+    background: #fff; color: var(--ocean);
+    border: none; padding: 16px 36px; border-radius: 10px;
+    font-size: 1.05rem; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    display: inline-block;
+  }
+  .btn-publish:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+  .publish-steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px; margin-top: 24px;
+  }
+  .publish-step {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 14px 12px; font-size: 0.83rem; line-height: 1.5;
+  }
+  .publish-step .step-n { font-size: 1.4rem; font-weight: 700; color: #a8dde9; display: block; margin-bottom: 4px; }
+
+  @media (max-width: 600px) {
+    .pw-form { grid-template-columns: 1fr; }
+    .admin-header { flex-direction: column; align-items: flex-start; }
+  }
+
+
+  /* Publish overlay */
+  .publish-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,61,92,0.82);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .publish-overlay.active { display: flex; }
+  .spinner {
+    width: 56px; height: 56px;
+    border: 5px solid rgba(255,255,255,0.25);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .publish-overlay p { color: white; font-size: 1.1rem; font-weight: 600; }
+
+
+  /* Status indicator */
+  .status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-weight: 600;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+  .status-indicator.online { background: #d4edda; color: #2d5a3d; }
+  .status-indicator.offline { background: #fdebd0; color: #8a4000; }
+  .status-dot { font-size: 0.7rem; }
+
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🛶</div>
+    <h1>Website Admin</h1>
+    <p>Denman Hornby Canoes &amp; Kayaks</p>
+    <label for="pw-input">Password</label>
+    <input type="password" id="pw-input" placeholder="Enter your password" autocomplete="current-password">
+    <div class="login-error" id="login-error">❌ Wrong password. Please try again.</div>
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+  </div>
+</div>
+
+<!-- ══ ADMIN PANEL ══ -->
+<div id="admin-panel">
+
+  <div class="admin-header">
+    <div>
+      <h1>🛶 Website Admin</h1>
+      <span>Denman Hornby Canoes &amp; Kayaks · Changes save automatically in the browser</span>
+    </div>
+    <div class="header-btns">
+      <a href="index.html" class="btn-view-site" target="_blank">View Website ↗</a>
+      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- ══ PUBLISH SECTION ══ -->
+    <div class="publish-section" id="publish-area">
+      <div class="ex-icon">🚀</div>
+      <h2>Publish Changes to Website</h2>
+      <p>After saving your changes in any section, click the button below.<br>
+      Your updates will go live on denmanpaddling.ca within 1–2 minutes.</p>
+      <button class="btn-publish" id="btn-publish" onclick="publishSite()">🚀 Publish to Website</button>
+    </div>
+
+    <div class="admin-intro">
+      <strong>Welcome, Melodie &amp; Mario!</strong> Use this page to update prices, phone numbers, and seasonal notices.
+      Change any numbers below and click <strong>💾 Save Changes</strong>. Then click <strong>🚀 Publish to Website</strong> above to update the live website instantly. No coding needed!
+    </div>
+
+    <!-- ── SECTION: PHONE & EMAIL ── -->
+    <div class="admin-section">
+      <div class="section-header open" onclick="toggleSection(this)">
+        <span class="s-icon">📞</span>
+        <div><h2>Phone &amp; Email</h2><div class="s-sub">Update your contact details</div></div>
+        <span class="chevron open">▼</span>
+      </div>
+      <div class="section-body open">
+        <div class="field-group">
+          <label class="field-label" for="phone1">Main Phone Number</label>
+          <div class="field-hint">The number shown on the booking section and footer</div>
+          <input class="field-input" type="tel" id="phone1" placeholder="e.g. 250-335-0079">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="phone2">Alternate / Text Number</label>
+          <input class="field-input" type="tel" id="phone2" placeholder="e.g. 250-702-0530">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="email1">Booking Email</label>
+          <input class="field-input" type="email" id="email1" placeholder="e.g. denmanpaddling@gmail.com">
+        </div>
+      </div>
+      <div class="save-section">
+        <button class="btn-save" onclick="saveSection('contact')">💾 Save Changes</button>
+        <span class="save-msg" id="save-msg-contact">✅ Saved!</span>
+      </div>
+    </div>
+
+    <!-- ── SECTION: SEASON NOTICE ── -->
+    <div class="admin-section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="s-icon">📢</span>
+        <div><h2>Season Notice &amp; Banner</h2><div class="s-sub">Show a message at the top of your website</div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="field-group">
+          <label class="field-label">Banner status</label>
+          <div class="notice-options">
+            <button class="notice-opt active" id="banner-off"   onclick="setBanner('off')">Off (no banner)</button>
+            <button class="notice-opt"        id="banner-open"  onclick="setBanner('open')">✅ We're Open!</button>
+            <button class="notice-opt"        id="banner-closed" onclick="setBanner('closed')">❄️ Closed for Season</button>
+            <button class="notice-opt"        id="banner-custom" onclick="setBanner('custom')">✏️ Custom message</button>
+          </div>
+        </div>
+        <div class="field-group" id="custom-msg-wrap" style="display:none;">
+          <label class="field-label" for="banner-text">Your custom message</label>
+          <div class="field-hint">Keep it short — one or two sentences</div>
+          <input class="field-input" type="text" id="banner-text" placeholder="e.g. Open weekends only in May. Call to book.">
+        </div>
+        <div class="tip-box">
+          <strong>Tip:</strong> Use the banner to let visitors know if you're open, closed for the winter, or only available on certain days. It appears as a small bar at the very top of the website.
+        </div>
+      </div>
+      <div class="save-section">
+        <button class="btn-save" onclick="saveSection('banner')">💾 Save Changes</button>
+        <span class="save-msg" id="save-msg-banner">✅ Saved!</span>
+      </div>
+    </div>
+
+    <!-- ── SECTION: RENTAL PRICES ── -->
+    <div class="admin-section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="s-icon">🛶</span>
+        <div><h2>Rental Prices</h2><div class="s-sub">Kayaks, canoes, paddleboards</div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+
+        <p style="font-size:0.88rem;color:var(--text-light);margin-bottom:20px;">Enter the price as a number only — no dollar sign needed. Example: <strong>60</strong></p>
+
+        <label class="field-label" style="margin-bottom:12px;">🛶 Single Kayak</label>
+        <div class="price-grid-form" style="margin-bottom:20px;">
+          <div class="price-field"><div class="field-label">Half Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-sk-half" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-sk-full" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">24 Hours</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-sk-24" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Multi-day (per day)</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-sk-multi" min="0" step="5"></div></div>
+        </div>
+
+        <label class="field-label" style="margin-bottom:12px;">🚣 Double Kayak</label>
+        <div class="price-grid-form" style="margin-bottom:20px;">
+          <div class="price-field"><div class="field-label">Half Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-dk-half" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-dk-full" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">24 Hours</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-dk-24" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Multi-day (per day)</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-dk-multi" min="0" step="5"></div></div>
+        </div>
+
+        <label class="field-label" style="margin-bottom:12px;">⛵ Canoe</label>
+        <div class="price-grid-form" style="margin-bottom:20px;">
+          <div class="price-field"><div class="field-label">Half Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-cn-half" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-cn-full" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">24 Hours</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-cn-24" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Multi-day (per day)</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-cn-multi" min="0" step="5"></div></div>
+        </div>
+
+        <label class="field-label" style="margin-bottom:12px;">🏄 Stand-Up Paddleboard (SUP)</label>
+        <div class="price-grid-form">
+          <div class="price-field"><div class="field-label">Half Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-sup-half" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-sup-full" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">24 Hours</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="p-sup-24" min="0" step="5"></div></div>
+        </div>
+
+      </div>
+      <div class="save-section">
+        <button class="btn-save" onclick="saveSection('prices')">💾 Save Changes</button>
+        <span class="save-msg" id="save-msg-prices">✅ Saved!</span>
+      </div>
+    </div>
+
+    <!-- ── SECTION: LESSON PRICES ── -->
+    <div class="admin-section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="s-icon">🌊</span>
+        <div><h2>Lesson Prices</h2><div class="s-sub">All lesson types, per person</div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <p style="font-size:0.88rem;color:var(--text-light);margin-bottom:20px;">Numbers only, no dollar sign needed.</p>
+        <div class="price-grid-form">
+          <div class="price-field"><div class="field-label">Intro – Adult</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-intro-adult" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Intro – Teen</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-intro-teen" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Intro – Child</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-intro-child" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">1 Child (1 hour)</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-child-1hr" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Children's – 1st child</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-kids-1" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Children's – 2nd child</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-kids-2" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Advanced – Adult</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-adv-adult" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Advanced – Teen</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="l-adv-teen" min="0" step="5"></div></div>
+        </div>
+      </div>
+      <div class="save-section">
+        <button class="btn-save" onclick="saveSection('lessons')">💾 Save Changes</button>
+        <span class="save-msg" id="save-msg-lessons">✅ Saved!</span>
+      </div>
+    </div>
+
+    <!-- ── SECTION: TOUR PRICES ── -->
+    <div class="admin-section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="s-icon">🧭</span>
+        <div><h2>Tour Prices</h2><div class="s-sub">Kayak tour and Welcome to Denman tour</div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <label class="field-label" style="margin-bottom:12px;">Kayak Tour</label>
+        <div class="price-grid-form" style="margin-bottom:20px;">
+          <div class="price-field"><div class="field-label">Half Day – Adult</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-k-hd-adult" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Half Day – Teen</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-k-hd-teen" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Half Day – Child</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-k-hd-child" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day – Adult</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-k-fd-adult" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day – Teen</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-k-fd-teen" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day – Child</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-k-fd-child" min="0" step="5"></div></div>
+        </div>
+        <label class="field-label" style="margin-bottom:12px;">Welcome to Denman Tour</label>
+        <div class="price-grid-form">
+          <div class="price-field"><div class="field-label">Half Day – Adult</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-w-hd-adult" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Half Day – Teen</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-w-hd-teen" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Half Day – Child</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-w-hd-child" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day – Adult</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-w-fd-adult" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day – Teen</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-w-fd-teen" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Full Day – Child</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="t-w-fd-child" min="0" step="5"></div></div>
+        </div>
+      </div>
+      <div class="save-section">
+        <button class="btn-save" onclick="saveSection('tours')">💾 Save Changes</button>
+        <span class="save-msg" id="save-msg-tours">✅ Saved!</span>
+      </div>
+    </div>
+
+    <!-- ── SECTION: ACCOMMODATION PRICES ── -->
+    <div class="admin-section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="s-icon">🏠</span>
+        <div><h2>Accommodation Prices</h2><div class="s-sub">Studio cabin and hostel rooms</div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <label class="field-label" style="margin-bottom:12px;">Studio Cabin (per night)</label>
+        <div class="price-grid-form" style="margin-bottom:20px;">
+          <div class="price-field"><div class="field-label">1 person</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="a-cabin-1" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">2 people</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="a-cabin-2" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">3 adults / 2 adults + 2 children</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="a-cabin-3" min="0" step="5"></div></div>
+        </div>
+        <label class="field-label" style="margin-bottom:12px;">Private Hostel Room (per night)</label>
+        <div class="price-grid-form">
+          <div class="price-field"><div class="field-label">Single</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="a-hostel-s" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Double</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="a-hostel-d" min="0" step="5"></div></div>
+          <div class="price-field"><div class="field-label">Triple</div><div class="price-input-wrap"><span class="price-prefix">$</span><input class="field-input" type="number" id="a-hostel-t" min="0" step="5"></div></div>
+        </div>
+      </div>
+      <div class="save-section">
+        <button class="btn-save" onclick="saveSection('accom')">💾 Save Changes</button>
+        <span class="save-msg" id="save-msg-accom">✅ Saved!</span>
+      </div>
+    </div>
+
+    <!-- ── SECTION: CHANGE PASSWORD ── -->
+    <div class="admin-section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <span class="s-icon">🔑</span>
+        <div><h2>Change Password</h2><div class="s-sub">Update your admin password</div></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="tip-box" style="margin-bottom:20px;">
+          <strong>Important:</strong> Write down your new password before saving. If you forget it, you will need to edit the HTML file directly.
+        </div>
+        <div class="pw-form">
+          <div class="field-group">
+            <label class="field-label" for="pw-current">Current Password</label>
+            <input class="field-input" type="password" id="pw-current" autocomplete="current-password">
+          </div>
+          <div></div>
+          <div class="field-group">
+            <label class="field-label" for="pw-new">New Password</label>
+            <input class="field-input" type="password" id="pw-new" autocomplete="new-password">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="pw-confirm">Confirm New Password</label>
+            <input class="field-input" type="password" id="pw-confirm" autocomplete="new-password">
+          </div>
+        </div>
+        <div class="pw-msg" id="pw-msg"></div>
+      </div>
+      <div class="save-section">
+        <button class="btn-save" onclick="changePassword()">🔑 Change Password</button>
+        <span class="save-msg" id="save-msg-pw"></span>
+      </div>
+    </div>
+
+  </div><!-- /admin-body -->
+</div><!-- /admin-panel -->
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── DEFAULT VALUES ── */
+  var DEFAULTS = {
+    // contact
+    phone1: '250-335-0079',
+    phone2: '250-702-0530',
+    email1: 'denmanpaddling@gmail.com',
+    // banner
+    bannerMode: 'off',
+    bannerText: '',
+    // rentals
+    'p-sk-half': 60, 'p-sk-full': 80, 'p-sk-24': 90, 'p-sk-multi': 60,
+    'p-dk-half': 100, 'p-dk-full': 120, 'p-dk-24': 130, 'p-dk-multi': 100,
+    'p-cn-half': 60, 'p-cn-full': 80, 'p-cn-24': 80, 'p-cn-multi': 50,
+    'p-sup-half': 60, 'p-sup-full': 80, 'p-sup-24': 90,
+    // lessons
+    'l-intro-adult': 100, 'l-intro-teen': 75, 'l-intro-child': 50, 'l-child-1hr': 60,
+    'l-kids-1': 60, 'l-kids-2': 50, 'l-adv-adult': 100, 'l-adv-teen': 75,
+    // tours
+    't-k-hd-adult': 150, 't-k-hd-teen': 100, 't-k-hd-child': 75,
+    't-k-fd-adult': 200, 't-k-fd-teen': 150, 't-k-fd-child': 100,
+    't-w-hd-adult': 125, 't-w-hd-teen': 85, 't-w-hd-child': 65,
+    't-w-fd-adult': 160, 't-w-fd-teen': 110, 't-w-fd-child': 85,
+    // accommodation
+    'a-cabin-1': 150, 'a-cabin-2': 175, 'a-cabin-3': 200,
+    'a-hostel-s': 120, 'a-hostel-d': 200, 'a-hostel-t': 255
+  };
+
+  var STORAGE_KEY  = 'dhck_site_data';
+  var PW_KEY       = 'dhck_admin_pw';
+  var DEFAULT_PW   = 'paddle2003';   /* ← change this before deployment */
+
+  /* ── HELPERS ── */
+  function getData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function setData(obj) {
+    var existing = getData();
+    var merged = Object.assign({}, existing, obj);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+  }
+  function getPassword() {
+    return localStorage.getItem(PW_KEY) || DEFAULT_PW;
+  }
+
+  /* ── LOGIN ── */
+  window.doLogin = function () {
+    var val = document.getElementById('pw-input').value;
+    if (val === getPassword()) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display  = 'block';
+      loadAllFields();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  };
+
+  window.doLogout = function () {
+    document.getElementById('admin-panel').style.display  = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('pw-input').value = '';
+  };
+
+  /* Allow Enter key on password field */
+  document.getElementById('pw-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') window.doLogin();
+  });
+
+  /* ── LOAD ALL FIELDS ── */
+  function loadAllFields() {
+    var d = getData();
+
+    /* text/email/tel inputs */
+    ['phone1','phone2','email1','banner-text'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = d[id] !== undefined ? d[id] : (DEFAULTS[id] || '');
+    });
+
+    /* number inputs */
+    var numIds = Object.keys(DEFAULTS).filter(function(k){ return typeof DEFAULTS[k] === 'number'; });
+    numIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = d[id] !== undefined ? d[id] : DEFAULTS[id];
+    });
+
+    /* banner mode */
+    var mode = d['bannerMode'] || 'off';
+    setBannerUI(mode);
+  }
+
+  /* ── SECTION TOGGLE ── */
+  window.toggleSection = function (header) {
+    var body = header.nextElementSibling;
+    var chevron = header.querySelector('.chevron');
+    var isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+  };
+
+  /* ── BANNER ── */
+  var currentBannerMode = 'off';
+
+  function setBannerUI(mode) {
+    currentBannerMode = mode;
+    ['off','open','closed','custom'].forEach(function(m) {
+      document.getElementById('banner-' + m).classList.toggle('active', m === mode);
+    });
+    document.getElementById('custom-msg-wrap').style.display = (mode === 'custom') ? 'block' : 'none';
+  }
+
+  window.setBanner = function (mode) { setBannerUI(mode); };
+
+  /* ── SAVE ── */
+  window.saveSection = function (section) {
+    var obj = {};
+
+    if (section === 'contact') {
+      ['phone1','phone2','email1'].forEach(function(id){
+        obj[id] = document.getElementById(id).value.trim();
+      });
+    }
+
+    if (section === 'banner') {
+      obj['bannerMode'] = currentBannerMode;
+      obj['bannerText'] = document.getElementById('banner-text').value.trim();
+    }
+
+    if (section === 'prices') {
+      ['p-sk-half','p-sk-full','p-sk-24','p-sk-multi',
+       'p-dk-half','p-dk-full','p-dk-24','p-dk-multi',
+       'p-cn-half','p-cn-full','p-cn-24','p-cn-multi',
+       'p-sup-half','p-sup-full','p-sup-24'].forEach(function(id){
+        obj[id] = parseInt(document.getElementById(id).value) || 0;
+      });
+    }
+
+    if (section === 'lessons') {
+      ['l-intro-adult','l-intro-teen','l-intro-child','l-child-1hr',
+       'l-kids-1','l-kids-2','l-adv-adult','l-adv-teen'].forEach(function(id){
+        obj[id] = parseInt(document.getElementById(id).value) || 0;
+      });
+    }
+
+    if (section === 'tours') {
+      ['t-k-hd-adult','t-k-hd-teen','t-k-hd-child',
+       't-k-fd-adult','t-k-fd-teen','t-k-fd-child',
+       't-w-hd-adult','t-w-hd-teen','t-w-hd-child',
+       't-w-fd-adult','t-w-fd-teen','t-w-fd-child'].forEach(function(id){
+        obj[id] = parseInt(document.getElementById(id).value) || 0;
+      });
+    }
+
+    if (section === 'accom') {
+      ['a-cabin-1','a-cabin-2','a-cabin-3',
+       'a-hostel-s','a-hostel-d','a-hostel-t'].forEach(function(id){
+        obj[id] = parseInt(document.getElementById(id).value) || 0;
+      });
+    }
+
+    setData(obj);
+    showSaveMsg('save-msg-' + section);
+    // Auto-publish if GitHub is configured
+    if (localStorage.getItem('gh_token')) {
+      setTimeout(function() { publishSite(); }, 300);
+    }
+  };
+
+  function updateStatusIndicator() {
+    var token = localStorage.getItem('gh_token');
+    var ind = document.getElementById('status-indicator');
+    var txt = document.getElementById('status-text');
+    if (!ind || !txt) return;
+    if (token) {
+      ind.className = 'status-indicator online';
+      ind.querySelector('.status-dot').textContent = '🟢';
+      txt.textContent = 'Connected — changes publish live';
+    } else {
+      ind.className = 'status-indicator offline';
+      ind.querySelector('.status-dot').textContent = '🔴';
+      txt.textContent = 'Offline — changes saved locally only';
+    }
+  }
+
+  function showSaveMsg(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var token = localStorage.getItem('gh_token');
+    if (!token) {
+      el.textContent = '💾 Saved locally. Set up GitHub to publish live.';
+      el.style.background = '#fdebd0';
+      el.style.color = '#8a4000';
+    } else {
+      el.textContent = '✅ Saved!';
+      el.style.background = '';
+      el.style.color = '';
+    }
+    el.classList.add('show');
+    setTimeout(function() {
+      el.classList.remove('show');
+      el.textContent = '✅ Saved!';
+      el.style.background = '';
+      el.style.color = '';
+    }, 4000);
+  }
+
+  /* ── CHANGE PASSWORD ── */
+  window.changePassword = function () {
+    var curr    = document.getElementById('pw-current').value;
+    var nw      = document.getElementById('pw-new').value;
+    var confirm = document.getElementById('pw-confirm').value;
+    var msg     = document.getElementById('pw-msg');
+
+    msg.className = 'pw-msg';
+
+    if (curr !== getPassword()) {
+      msg.className = 'pw-msg error'; msg.textContent = '❌ Current password is incorrect.'; return;
+    }
+    if (nw.length < 6) {
+      msg.className = 'pw-msg error'; msg.textContent = '❌ New password must be at least 6 characters.'; return;
+    }
+    if (nw !== confirm) {
+      msg.className = 'pw-msg error'; msg.textContent = '❌ New passwords do not match.'; return;
+    }
+
+    localStorage.setItem(PW_KEY, nw);
+    msg.className = 'pw-msg success';
+    msg.textContent = '✅ Password changed successfully! Please remember your new password.';
+    document.getElementById('pw-current').value = '';
+    document.getElementById('pw-new').value = '';
+    document.getElementById('pw-confirm').value = '';
+  };
+
+  /* ── EXPORT / DOWNLOAD UPDATED index.html ── */
+  // GitHub settings
+  function saveGithubSettings() {
+    updateStatusIndicator();
+    localStorage.setItem('gh_user', document.getElementById('gh-user').value.trim());
+    localStorage.setItem('gh_repo', document.getElementById('gh-repo').value.trim());
+    localStorage.setItem('gh_token', document.getElementById('gh-token').value.trim());
+    document.getElementById('github-setup').style.display = 'none';
+    alert('✅ GitHub settings saved!');
+  }
+
+  function toggleGithubSetup() {
+    var el = document.getElementById('github-setup');
+    if (el.style.display === 'none') {
+      el.style.display = 'block';
+      document.getElementById('gh-user').value = localStorage.getItem('gh_user') || '';
+      document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || '';
+      document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
+  window.publishSite = function () {
+    var ghUser  = localStorage.getItem('gh_user');
+    var ghRepo  = localStorage.getItem('gh_repo');
+    var ghToken = localStorage.getItem('gh_token');
+
+    if (!ghUser || !ghRepo || !ghToken) {
+      document.getElementById('github-setup').style.display = 'block';
+      document.getElementById('gh-user').value = ghUser || '';
+      document.getElementById('gh-repo').value = ghRepo || '';
+      alert('Please fill in your GitHub settings first, then click Save GitHub Settings.');
+      return;
+    }
+
+    var btn = document.getElementById('btn-publish');
+    btn.textContent = '⏳ Publishing...';
+    btn.disabled = true;
+    document.getElementById('publish-overlay').classList.add('active');
+
+    var d = getData();
+    function v(key) {
+      return (d[key] !== undefined) ? d[key] : DEFAULTS[key];
+    }
+
+    // Fetch the index.html file text
+    fetch('index.html')
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+
+        // ── Replace all data-price spans ──
+        var priceKeys = ['p-sk-half','p-sk-full','p-sk-24','p-sk-multi',
+          'p-dk-half','p-dk-full','p-dk-24','p-dk-multi',
+          'p-cn-half','p-cn-full','p-cn-24','p-cn-multi',
+          'p-sup-half','p-sup-full','p-sup-24'];
+        priceKeys.forEach(function(key) {
+          var re = new RegExp('(data-price="' + key + '">)\\$?[0-9]+', 'g');
+          html = html.replace(re, '$1$' + v(key));
+        });
+
+        // ── Replace data-lesson spans ──
+        var lessonKeys = ['l-intro-adult','l-intro-teen','l-intro-child','l-child-1hr',
+          'l-kids-1','l-kids-2','l-adv-adult','l-adv-teen'];
+        lessonKeys.forEach(function(key) {
+          var re = new RegExp('(data-lesson="' + key + '">)\\$?[0-9]+', 'g');
+          html = html.replace(re, '$1$' + v(key));
+        });
+
+        // ── Replace data-tour cells ──
+        var tourKeys = ['t-k-hd-adult','t-k-hd-teen','t-k-hd-child',
+          't-k-fd-adult','t-k-fd-teen','t-k-fd-child',
+          't-w-hd-adult','t-w-hd-teen','t-w-hd-child',
+          't-w-fd-adult','t-w-fd-teen','t-w-fd-child'];
+        tourKeys.forEach(function(key) {
+          var re = new RegExp('(data-tour="' + key + '"><strong>)\\$?[0-9]+(</strong>)', 'g');
+          html = html.replace(re, '$1$' + v(key) + '$2');
+        });
+
+        // ── Replace data-accom cells ──
+        var accomKeys = ['a-cabin-1','a-cabin-2','a-cabin-3'];
+        accomKeys.forEach(function(key) {
+          var re = new RegExp('(data-accom="' + key + '">)\\$?[0-9]+\\s*/\\s*night', 'g');
+          html = html.replace(re, '$1$' + v(key) + ' / night');
+        });
+        ['a-hostel-s','a-hostel-d','a-hostel-t'].forEach(function(key) {
+          var re = new RegExp('(data-accom-raw="' + key + '">)\\$?[0-9]+', 'g');
+          html = html.replace(re, '$1$' + v(key));
+        });
+
+        // ── Replace contact info ──
+        // phone1 text nodes and href
+        html = html.replace(/(data-contact="phone1">)[^<]+/g, '$1' + v('phone1'));
+        html = html.replace(/(href="tel:\+1)[0-9]+("\s[^>]*data-contact="phone1")/g, '$1' + v('phone1').replace(/[^0-9]/g,'') + '$2');
+        html = html.replace(/(data-contact-card="phone1"\s+href="tel:\+1)[0-9]+/g, '$1' + v('phone1').replace(/[^0-9]/g,''));
+
+        // phone2
+        html = html.replace(/(data-contact="phone2">)[^<]+/g, '$1' + v('phone2'));
+
+        // email
+        html = html.replace(/(data-contact="email">)[^<]+/g, '$1' + v('email1'));
+        html = html.replace(/(href="mailto:)[^"]+("\s[^>]*data-contact="email")/g, '$1' + v('email1') + '$2');
+        html = html.replace(/(data-contact-card="email"\s+href="mailto:)[^"]+/g, '$1' + v('email1'));
+
+        // ── Banner: update the season-banner default HTML ──
+        // We embed the current banner state directly
+        var bannerMode = d['bannerMode'] || 'off';
+        var bannerMessages = {
+          'open': '✅ We are open for the season! Call or email to book your adventure.',
+          'closed': '❄️ We are closed for the winter season. Check back in spring!',
+          'custom': d['bannerText'] || ''
+        };
+        if (bannerMode !== 'off' && bannerMessages[bannerMode]) {
+          html = html.replace(
+            /(<div id="season-banner"[^>]*style=")display:none;/,
+            '$1display:block;'
+          );
+          html = html.replace(
+            /(<div id="season-banner"[^>]*>)[^<]*/,
+            '$1' + bannerMessages[bannerMode]
+          );
+        } else {
+          html = html.replace(
+            /(<div id="season-banner"[^>]*style=")display:block;/,
+            '$1display:none;'
+          );
+        }
+
+        // ── Upload to GitHub via API ──
+        var apiUrl = 'https://api.github.com/repos/' + ghUser + '/' + ghRepo + '/contents/index.html';
+
+        // First get the current file SHA (required by GitHub API to update)
+        fetch(apiUrl, {
+          headers: {
+            'Authorization': 'token ' + ghToken,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(fileInfo) {
+          var sha = fileInfo.sha;
+          // Safe Base64 encoding that handles UTF-8 / diacritics correctly
+          var encoded = btoa(encodeURIComponent(html).replace(/%([0-9A-F]{2})/g, function(m, p1) {
+            return String.fromCharCode('0x' + p1);
+          }));
+
+          return fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              'Authorization': 'token ' + ghToken,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: 'Update prices via admin panel',
+              content: encoded,
+              sha: sha
+            })
+          });
+        })
+        .then(function(r) {
+          if (r.ok) {
+            document.getElementById('publish-overlay').classList.remove('active');
+            btn.textContent = '✅ Published! Live in 1–2 minutes.';
+            btn.style.background = '#2d5a3d';
+            setTimeout(function() {
+              btn.textContent = '🚀 Publish to Website';
+              btn.style.background = '';
+              btn.disabled = false;
+            }, 5000);
+          } else {
+            return r.json().then(function(e) { throw new Error(e.message); });
+          }
+        })
+        .catch(function(err) {
+          document.getElementById('publish-overlay').classList.remove('active');
+          btn.textContent = '❌ Error — check GitHub settings';
+          btn.disabled = false;
+          setTimeout(function() { btn.textContent = '🚀 Publish to Website'; }, 4000);
+          console.error(err);
+          alert('Could not publish. Please check your GitHub settings (username, repo name, token). Error: ' + err.message);
+        });
+
+      })
+      .catch(function() {
+        document.getElementById('publish-overlay').classList.remove('active');
+        btn.textContent = '🚀 Publish to Website';
+        btn.disabled = false;
+        alert('Could not read index.html. Make sure you opened this page from your live website, not from your computer.');
+      });
+  };
+
+}());
+</script>
+
+  <div class="publish-overlay" id="publish-overlay">
+    <div class="spinner"></div>
+    <p>Publishing to website…</p>
+  </div>
+
+</body>
+</html>
