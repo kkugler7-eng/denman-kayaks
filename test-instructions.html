@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your New Website – Please Test!</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 19px;
+    line-height: 1.8;
+    color: #1a2530;
+    background: #f0f4f8;
+  }
+  .page { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .header {
+    background: #0a3d5c;
+    color: white;
+    border-radius: 18px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .header .icon { font-size: 4rem; margin-bottom: 12px; }
+  .header h1 { font-size: 1.9rem; margin-bottom: 10px; }
+  .header p { opacity: 0.8; font-size: 1.05rem; }
+
+  .intro {
+    background: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    border-left: 5px solid #2d9cbf;
+  }
+
+  .step-card {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(10,61,92,0.08);
+  }
+  .step-top {
+    background: #f5ede0;
+    padding: 18px 26px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 2px solid #d0dde6;
+  }
+  .step-num {
+    background: #0a3d5c;
+    color: white;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-top h2 { font-size: 1.15rem; color: #0a3d5c; }
+  .step-body { padding: 24px 28px; font-size: 1rem; color: #2a3a48; line-height: 1.85; }
+  .step-body p { margin-bottom: 12px; }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  .link-box {
+    background: #0a3d5c;
+    color: white;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    font-size: 1rem;
+    word-break: break-all;
+  }
+  .link-box .lbl { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; margin-bottom: 4px; }
+  .link-box a { color: #a8dde9; text-decoration: none; font-weight: 600; font-size: 1.05rem; }
+
+  .do-box {
+    background: #e8f5ec;
+    border-left: 4px solid #2d5a3d;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 0.97rem;
+    color: #1a3a28;
+  }
+  .do-box strong { color: #2d5a3d; display: block; margin-bottom: 4px; }
+
+  .tip {
+    background: #e8f4fb;
+    border-left: 4px solid #2d9cbf;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 0.95rem;
+    color: #1a3a48;
+  }
+
+  .password-box {
+    background: #1a2530;
+    color: #a8dde9;
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 18px;
+    border-radius: 10px;
+    margin: 14px 0;
+    letter-spacing: 0.15em;
+  }
+
+  .success {
+    background: #2d5a3d;
+    color: white;
+    border-radius: 14px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 36px;
+  }
+  .success .icon { font-size: 3rem; margin-bottom: 12px; }
+  .success h2 { font-size: 1.4rem; margin-bottom: 10px; }
+  .success p { opacity: 0.85; font-size: 1rem; line-height: 1.7; }
+
+  .checklist { list-style: none; margin-top: 8px; }
+  .checklist li {
+    padding: 9px 0 9px 34px;
+    position: relative;
+    border-bottom: 1px solid #d0dde6;
+    font-size: 1rem;
+  }
+  .checklist li:last-child { border: none; }
+  .checklist li::before {
+    content: '☐';
+    position: absolute; left: 0; top: 9px;
+    font-size: 1.2rem; color: #2d9cbf;
+  }
+
+  @media (max-width: 600px) {
+    body { font-size: 17px; }
+    .header h1 { font-size: 1.5rem; }
+    .step-body { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="icon">🛶</div>
+    <h1>Your New Website is Ready!</h1>
+    <p>Hi Melodie and Mario — please follow these steps to test it.<br>
+    It should take about 10 minutes.</p>
+  </div>
+
+  <div class="intro">
+    Karel has built your new website and it is ready for you to look at and test.
+    At this stage it is on a temporary address (not yet on denmanpaddling.ca — that comes later).
+    Please go through each step below and let Karel know if anything looks wrong or needs changing.
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-card">
+    <div class="step-top">
+      <div class="step-num">1</div>
+      <h2>Look at your new website</h2>
+    </div>
+    <div class="step-body">
+      <p>Click the link below to open your new website. It will open in your browser just like any other website.</p>
+      <div class="link-box">
+        <div class="lbl">Your website (click or copy into browser):</div>
+        <a href="https://kkugler7-eng.github.io/denman-kayaks" target="_blank">
+          https://kkugler7-eng.github.io/denman-kayaks
+        </a>
+      </div>
+      <p>Scroll through the whole page. Check that:</p>
+      <ul class="checklist">
+        <li>Your business name appears correctly at the top</li>
+        <li>The prices look right</li>
+        <li>Your phone number and email are correct</li>
+        <li>The photos and colours look good</li>
+        <li>It works on your phone too (open the same link on your phone)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card">
+    <div class="step-top">
+      <div class="step-num">2</div>
+      <h2>Open your private Admin Panel</h2>
+    </div>
+    <div class="step-body">
+      <p>This is your private page for updating prices and showing seasonal messages. Nobody else knows this address — keep it private.</p>
+      <div class="link-box">
+        <div class="lbl">Your admin panel:</div>
+        <a href="https://kkugler7-eng.github.io/denman-kayaks/admin.html" target="_blank">
+          https://kkugler7-eng.github.io/denman-kayaks/admin.html
+        </a>
+      </div>
+      <p>You will see a login screen. Enter this password:</p>
+      <div class="password-box">paddle2003</div>
+      <div class="tip">This is the default password. You can change it inside the admin panel whenever you like — there is a "Change Password" section at the bottom.</div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card">
+    <div class="step-top">
+      <div class="step-num">3</div>
+      <h2>Test changing a price</h2>
+    </div>
+    <div class="step-body">
+      <p>Once you are logged in to the Admin Panel, try changing a price to make sure it works:</p>
+      <div class="do-box">
+        <strong>Try this:</strong>
+        Click on "🛶 Rental Prices" to expand it → change the "Single Kayak – Half Day" price to any number → click "💾 Save Changes" → you should see "✅ Saved!" appear briefly.
+      </div>
+      <p>Then open your website in a new tab and refresh the page — the new price should appear automatically.</p>
+      <div class="tip">
+        <strong>Note:</strong> At this stage, saved prices only show on <em>your own computer</em>. Once the website moves to denmanpaddling.ca, Karel will show you how to publish price changes for all visitors.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card">
+    <div class="step-top">
+      <div class="step-num">4</div>
+      <h2>Test the season banner</h2>
+    </div>
+    <div class="step-body">
+      <p>In the Admin Panel, click on <strong>"📢 Season Notice &amp; Banner"</strong> to expand it.</p>
+      <div class="do-box">
+        <strong>Try this:</strong>
+        Click "✅ We're Open!" → click "💾 Save Changes" → then open your website and refresh — you should see a blue bar at the very top of the page.
+      </div>
+      <p>When you are done testing, go back to Admin → Banner → click "Off" → Save — to remove the banner.</p>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-card">
+    <div class="step-top">
+      <div class="step-num">5</div>
+      <h2>Read your maintenance guide</h2>
+    </div>
+    <div class="step-body">
+      <p>This guide explains everything about maintaining your website — how to update prices, change your password, and more. Please read through it so you know what to do.</p>
+      <div class="link-box">
+        <div class="lbl">Your maintenance guide:</div>
+        <a href="https://kkugler7-eng.github.io/denman-kayaks/guide.html" target="_blank">
+          https://kkugler7-eng.github.io/denman-kayaks/guide.html
+        </a>
+      </div>
+      <div class="tip">
+        We recommend bookmarking all three links in your browser so you can find them easily later.
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step-card">
+    <div class="step-top">
+      <div class="step-num">6</div>
+      <h2>Tell Karel what you think</h2>
+    </div>
+    <div class="step-body">
+      <p>After testing, please send Karel a message with:</p>
+      <ul class="checklist">
+        <li>Does everything look correct? Any prices or details that need fixing?</li>
+        <li>Is anything missing that should be on the website?</li>
+        <li>Does the admin panel work for you?</li>
+        <li>Any other feedback or questions?</li>
+      </ul>
+      <p style="margin-top:14px;">Once you are happy with everything, Karel will advise how to connect the website to your <strong>denmanpaddling.ca</strong> domain — and it could be live for all your customers!</p>
+    </div>
+  </div>
+
+  <div class="success">
+    <div class="icon">🌊</div>
+    <h2>Thank you for testing!</h2>
+    <p>Your three links to bookmark:<br><br>
+    🌐 <strong>Website:</strong> kkugler7-eng.github.io/denman-kayaks<br>
+    ⚙️ <strong>Admin:</strong> kkugler7-eng.github.io/denman-kayaks/admin.html<br>
+    📖 <strong>Guide:</strong> kkugler7-eng.github.io/denman-kayaks/guide.html
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
